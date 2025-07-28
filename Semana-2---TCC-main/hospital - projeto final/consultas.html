@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Consultas - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Minhas Consultas</h1>
+            <nav class="nav-menu">
+                <a href="agendamento.html" class="nav-link">Agendar Nova Consulta</a>
+                <a href="historico.html" class="nav-link">Histórico de Consultas</a>
+                <a href="logout.html" class="nav-link">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Olá, [Nome do Paciente]!</h2>
+            <p class="description-text">Aqui você pode visualizar suas próximas consultas agendadas.</p>
+
+            <div class="consultas-section">
+                <h3>Próximas Consultas</h3>
+                <div class="no-consultas" id="noConsultasMessage" style="display: none;">
+                    <p>Você não tem nenhuma consulta agendada no momento.</p>
+                    <button class="btn-primary">Agendar minha primeira consulta</button>
+                </div>
+                <div class="consultas-list" id="consultasList">
+                    <div class="consulta-item">
+                        <div class="consulta-info">
+                            <span class="consulta-date">28/07/2025</span>
+                            <span class="consulta-time">10:00</span>
+                            <span class="consulta-specialty">Clínico Geral</span>
+                        </div>
+                        <p class="consulta-details">Dr. João Silva - Consultório 3B</p>
+                        <button class="btn-cancel">Cancelar Consulta</button>
+                    </div>
+
+                    <div class="consulta-item">
+                        <div class="consulta-info">
+                            <span class="consulta-date">15/08/2025</span>
+                            <span class="consulta-time">14:30</span>
+                            <span class="consulta-specialty">Dermatologia</span>
+                        </div>
+                        <p class="consulta-details">Dra. Ana Costa - Sala 101</p>
+                        <button class="btn-cancel">Cancelar Consulta</button>
+                    </div>
+                    
+                    </div>
+            </div>
+
+            <div class="action-area">
+                <a class="nav-link">Precisa de um novo agendamento?</a><br>
+                <button class="btn-primary">Agendar Nova Consulta</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> <script src="consultas.js"></script> </body>
+</html>

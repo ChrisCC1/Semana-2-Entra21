@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Paciente - MedCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="top-bar-info">
+                <span class="info-item">Bem-vindo(a), <span id="pacienteNomeDisplayDashboard"></span></span>
+                <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+                <a href="logout.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+            <div class="main-header-content">
+                <div class="logo-container">
+                    <a href="paciente_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+                
+                <nav class="nav-main-menu">
+                    <a href="paciente_dashboard.html" class="nav-main-link active">Dashboard</a>
+                    <a href="agendamento.html" class="nav-main-link">Agendar Consulta</a>
+                    <a href="historico.html" class="nav-main-link">Meu Histórico</a>
+                    <a href="#" class="nav-main-link">Exames/Receitas</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Olá, <span id="welcomePacienteNome"></span>! Como podemos ajudar hoje?</h2>
+            <p class="description-text">Aqui você pode gerenciar suas consultas e acessar seu histórico médico.</p>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card action-card" id="btnAgendarConsulta">
+                    <i class="fa-solid fa-calendar-plus dashboard-icon"></i>
+                    <h3>Agendar Nova Consulta</h3>
+                    <p>Encontre horários disponíveis com nossos especialistas.</p>
+                </div>
+
+                <div class="dashboard-card action-card" id="btnProximasConsultas">
+                    <i class="fa-solid fa-clock-rotate-left dashboard-icon"></i>
+                    <h3>Minhas Próximas Consultas</h3>
+                    <p>Visualize, edite ou cancele seus próximos agendamentos.</p>
+                </div>
+
+                <div class="dashboard-card action-card" id="btnAcessarHistorico">
+                    <i class="fa-solid fa-file-medical dashboard-icon"></i>
+                    <h3>Acessar Meu Histórico</h3>
+                    <p>Consulte suas consultas anteriores, exames e receitas.</p>
+                </div>
+
+                <div class="dashboard-card action-card" id="btnExamesReceitas">
+                    <i class="fa-solid fa-receipt dashboard-icon"></i>
+                    <h3>Exames e Receitas</h3>
+                    <p>Baixe seus resultados de exames e receitas médicas.</p>
+                </div>
+                </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="paciente_dashboard.js"></script>
+</body>
+</html>

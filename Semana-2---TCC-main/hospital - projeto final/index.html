@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo - MedCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="top-bar-info">
+                <span class="info-item"><i class="fa-solid fa-phone"></i> (XX) XXXX-XXXX</span>
+                <span class="info-item"><i class="fa-solid fa-envelope"></i> contato@hospitalconnect.com</span>
+                <span class="info-item">Atendimento 24h</span>
+            </div>
+
+            <div class="main-header-content">
+                <div class="logo-container">
+                    <a href="index.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+                
+                <nav class="nav-main-menu">
+                    <a href="index.html" class="nav-main-link active">Início</a>
+                    <a href="servicos.html" class="nav-main-link">Serviços</a>
+                    <a href="sobre.html" class="nav-main-link">Sobre Nós</a>
+                    <a href="contato.html" class="nav-main-link">Contato</a>
+                    <a href="medico_login.html" class="nav-main-link btn-small-ghost"><i class="fa-solid fa-user-doctor"></i> Médico</a>
+                    <a href="paciente_login.html" class="nav-main-link btn-small-primary"><i class="fa-solid fa-user-injured"></i> Paciente</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content hero-section">
+        <div class="container content-card homepage-card">
+            <h1 class="welcome-heading">Bem-vindo(a) ao Hospital Connect!</h1>
+            <p class="hero-description">Sua plataforma completa para gerenciamento de saúde e agendamento de consultas.</p>
+            
+            <div class="access-options">
+                <div class="option-card action-card" id="btnAcessoMedico"> <i class="fa-solid fa-user-doctor access-icon"></i>
+                    <h2>Acesso Médico</h2>
+                    <p>Entre para gerenciar sua agenda, pacientes e estoque de medicamentos.</p>
+                    <button id="btnAcessoMedico" class="btn-primary btn-access">Login Médico</button>
+                </div>
+
+                <div class="option-card action-card" id="btnAcessoPaciente"> <i class="fa-solid fa-user-injured access-icon"></i>
+                    <h2>Acesso Paciente</h2>
+                    <p>Agende consultas, veja exames e acesse seu histórico médico.</p>
+                    <button id="btnAcessoPaciente" class="btn-primary btn-access">Login Paciente</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Nova Consulta - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Agendar Nova Consulta</h1>
+            <nav class="nav-menu">
+                <a href="consultas.html" class="nav-link">Minhas Consultas</a>
+                <a href="historico.html" class="nav-link">Histórico de Consultas</a>
+                <a href="logout.html" class="nav-link">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Agende seu Horário</h2>
+            <p class="description-text">Preencha os campos abaixo para encontrar a consulta ideal para você.</p>
+
+            <form id="agendamentoForm" class="agendamento-form">
+                <div class="form-group">
+                    <label for="especialidade">Especialidade</label>
+                    <select id="especialidade" name="especialidade" required>
+                        <option value="">Selecione a Especialidade</option>
+                        <option value="clinico_geral">Clínico Geral</option>
+                        <option value="dermatologia">Dermatologia</option>
+                        <option value="cardiologia">Cardiologia</option>
+                        <option value="pediatria">Pediatria</option>
+                        <option value="ginecologia">Ginecologia</option>
+                    </select>
+                    <div class="error-message" id="especialidadeError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="medico">Médico</label>
+                    <select id="medico" name="medico" required disabled>
+                        <option value="">Selecione o Médico</option>
+                    </select>
+                    <div class="error-message" id="medicoError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dataConsulta">Data da Consulta</label>
+                    <input type="date" id="dataConsulta" name="dataConsulta" required disabled>
+                    <div class="error-message" id="dataConsultaError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="horaConsulta">Horário Disponível</label>
+                    <select id="horaConsulta" name="horaConsulta" required disabled>
+                        <option value="">Selecione o Horário</option>
+                    </select>
+                    <div class="error-message" id="horaConsultaError"></div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Confirmar Agendamento</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="agendamento.js"></script> </body>
+</html>

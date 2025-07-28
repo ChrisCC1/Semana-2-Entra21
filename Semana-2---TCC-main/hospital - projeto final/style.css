@@ -1,0 +1,2420 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Variáveis de Cores */
+:root {
+    --primary-blue: #007bff; /* Um azul vibrante */
+    --secondary-red: #dc3545; /* Um vermelho para destaque */
+    --text-dark: #333;
+    --text-light: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-dark-card: #ffffff;
+    --border-color: #ced4da;
+    --box-shadow-light: rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos Globais */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, var(--primary-blue), #6a00a1); /* Gradiente de azul para roxo */
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Cabeçalho */
+.header {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px var(--box-shadow-light);
+}
+
+.header .logo {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1; /* Faz com que o conteúdo principal ocupe o espaço restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.form-card {
+    background-color: var(--background-dark-card);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px var(--box-shadow-light);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.form-card h2 {
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Formulário */
+.registration-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.registration-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
+    width: calc(100% - 20px); /* Ajusta para padding */
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Garante que padding não aumente a largura total */
+}
+
+.registration-form input[type="text"]:focus,
+.registration-form input[type="email"]:focus,
+.registration-form input[type="password"]:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra suave no foco */
+}
+
+.error-message {
+    color: var(--secondary-red);
+    font-size: 0.85em;
+    margin-top: 5px;
+    height: 18px; /* Para manter o layout estável mesmo sem erro */
+}
+
+.btn-submit {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3; /* Azul um pouco mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.login-link {
+    margin-top: 25px;
+    font-size: 0.95em;
+    color: var(--text-dark);
+}
+
+.login-link a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Rodapé */
+.footer {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    box-shadow: 0 -4px 8px var(--box-shadow-light);
+}
+
+/* Responsividade Básica */
+@media (max-width: 600px) {
+    .form-card {
+        padding: 30px 20px;
+    }
+
+    .form-card h2 {
+        font-size: 1.8em;
+    }
+
+    .header .logo {
+        font-size: 1.8em;
+    }
+
+    .registration-form input[type="text"],
+    .registration-form input[type="email"],
+    .registration-form input[type="password"] {
+        width: calc(100% - 16px); /* Ajusta para padding menor em telas pequenas */
+        padding: 10px 8px;
+    }
+}
+
+
+/* --- Novo CSS para a Página de Consultas --- */
+
+.header .nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espaço entre os links de navegação */
+    margin-top: 10px;
+}
+
+.header .nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05em;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo suave no hover */
+}
+
+.content-card {
+    background-color: var(--background-dark-card);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px var(--box-shadow-light);
+    width: 100%;
+    max-width: 800px; /* Maior para exibir mais conteúdo */
+    text-align: center;
+    margin-top: 30px; /* Espaçamento do cabeçalho */
+    margin-bottom: 30px; /* Espaçamento do rodapé */
+}
+
+.welcome-message {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+.description-text {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.consultas-section h3 {
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    display: inline-block; /* Para que a borda seja apenas no texto */
+}
+
+.no-consultas {
+    padding: 30px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.no-consultas p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.consultas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaço entre os itens de consulta */
+}
+
+.consulta-item {
+    background-color: var(--background-light); /* Fundo claro para o item */
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary-blue); /* Borda azul de destaque */
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px var(--box-shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.consulta-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--box-shadow-light);
+}
+
+.consulta-info {
+    flex: 2; /* Ocupa mais espaço */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.consulta-date {
+    font-weight: 700;
+    font-size: 1.2em;
+    color: var(--primary-blue);
+}
+
+.consulta-time, .consulta-specialty {
+    font-size: 0.95em;
+    color: var(--text-dark);
+}
+
+.consulta-details {
+    flex: 3; /* Ocupa ainda mais espaço */
+    font-size: 1em;
+    color: var(--text-dark);
+    margin: 0 20px; /* Espaçamento lateral */
+}
+
+.btn-cancel {
+    background-color: var(--secondary-red);
+    color: var(--text-light);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Não permite que o botão diminua */
+    margin-left: auto; /* Empurra para a direita */
+}
+
+.btn-cancel:hover {
+    background-color: #c82333; /* Vermelho mais escuro no hover */
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.action-area {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.action-area p {
+    font-size: 1.05em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* Responsividade para itens de consulta */
+@media (max-width: 768px) {
+    .consulta-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .consulta-info, .consulta-details {
+        width: 100%;
+        margin: 0;
+    }
+
+    .btn-cancel {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .header .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+}
+
+
+/* --- Novo CSS para a Página de Histórico de Consultas --- */
+
+.historico-section h3 {
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.no-historico {
+    padding: 30px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.no-historico p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.historico-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Mais espaço entre os itens para detalhes */
+}
+
+.historico-item {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--secondary-red); /* Borda vermelha para diferenciar do futuro */
+    border-radius: 8px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 2px 4px var(--box-shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.historico-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--box-shadow-light);
+}
+
+.historico-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.historico-date {
+    font-weight: 700;
+    font-size: 1.3em;
+    color: var(--secondary-red); /* Data em vermelho para destaque do passado */
+}
+
+.historico-specialty {
+    font-size: 1.1em;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.historico-body {
+    margin-top: 15px;
+}
+
+.historico-doctor,
+.historico-diagnosis,
+.historico-notes {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.historico-doctor {
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.historico-diagnosis strong,
+.historico-notes strong {
+    color: var(--primary-blue);
+}
+
+.historico-meds {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.historico-meds li {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.btn-view-details {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.btn-view-details:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade para histórico */
+@media (max-width: 768px) {
+    .historico-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .historico-date {
+        font-size: 1.2em;
+    }
+    .historico-specialty {
+        font-size: 1em;
+    }
+    .historico-item {
+        padding: 20px;
+    }
+}
+
+/* --- Novo CSS para a Página de Agendamento --- */
+
+.agendamento-form select,
+.agendamento-form input[type="date"] {
+    width: calc(100% - 20px); /* Ajusta para padding */
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    appearance: none; /* Remove estilo padrão de select/date em alguns browsers */
+    background-color: white; /* Garante fundo branco para select */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.6c-5.1%200-9.8%202.3-13.2%206.5-3.4%204.2-4.4%209.7-2.9%2014.9L132.8%20275c3.6%206.5%209.7%2010.4%2016.2%2010.4s12.6-3.9%2016.2-10.4l119.5-190.4c1.5-5.2.5-10.7-2.9-14.9z%22%2F%3E%3C%2Fsvg%3E'); /* Seta customizada para select */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.agendamento-form select:focus,
+.agendamento-form input[type="date"]:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.agendamento-form select:disabled,
+.agendamento-form input[type="date"]:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    color: #6c757d;
+}
+
+/* Garante que o input date não tenha seta extra em alguns navegadores */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 1; /* Garante que o ícone de calendário apareça */
+    cursor: pointer;
+}
+
+/* Ajusta o estilo do botão submit para agendamento, se precisar de alguma diferença */
+.agendamento-form .btn-submit {
+    margin-top: 30px; /* Mais espaçamento superior para o botão */
+}
+
+/* --- Novo CSS para a Página de Logout (opcional, pode ficar no próprio HTML) --- */
+.logout-message {
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 1.2em;
+    color: var(--text-dark);
+}
+.logout-message h2 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+.logout-message p {
+    margin-bottom: 25px;
+}
+.logout-message a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+.logout-message a:hover {
+    text-decoration: underline;
+}
+
+/* --- Novo CSS para o Dashboard do Médico --- */
+
+.nav-text {
+    color: var(--text-light);
+    font-weight: 600;
+    margin-right: 20px;
+    font-size: 1.1em;
+}
+
+.dashboard-summary-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.summary-card {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 8px var(--box-shadow-light);
+    flex: 1; /* Permite que os cards cresçam e diminuam */
+    min-width: 280px; /* Largura mínima para cards em linha */
+    max-width: 32%; /* Máximo de 3 cards por linha em desktop */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--box-shadow-light);
+}
+
+.summary-card h3 {
+    color: var(--primary-blue);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.summary-card .card-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--secondary-red); /* Cor de destaque para os números */
+    margin-bottom: 20px;
+}
+
+.summary-card .card-link {
+    display: inline-block;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 3px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.summary-card .card-link:hover {
+    color: #0056b3;
+    border-color: #0056b3;
+}
+
+.dashboard-quick-actions {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.dashboard-quick-actions h3 {
+    color: var(--primary-blue);
+    font-size: 1.6em;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.dashboard-quick-actions .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Ajusta o estilo dos botões primários para serem um pouco maiores aqui */
+.dashboard-quick-actions .btn-primary {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    min-width: 250px;
+}
+
+/* Responsividade para o Dashboard */
+@media (max-width: 992px) {
+    .summary-card {
+        max-width: 48%; /* 2 cards por linha em tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .nav-text {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .summary-card {
+        max-width: 95%; /* 1 card por linha em celulares */
+    }
+    .dashboard-quick-actions .btn-primary {
+        width: 100%; /* Botões de ação rápida ocupam a largura total em celulares */
+        min-width: unset;
+    }
+}
+
+/* --- Novo CSS para a Página "Minha Agenda" do Médico --- */
+
+.agenda-controls {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.agenda-controls label {
+    font-size: 1.1em;
+    color: var(--primary-blue);
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.agenda-controls input[type="date"] {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.agenda-controls input[type="date"]:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.agenda-list-section h3 {
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.no-agenda-message {
+    padding: 30px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.no-agenda-message p {
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+.consultas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.consulta-item {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary-blue); /* Borda azul para indicar consultas ativas/da agenda */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 4px var(--box-shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.consulta-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--box-shadow-light);
+}
+
+.consulta-time {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--secondary-red); /* Hora em vermelho para destaque */
+    min-width: 80px; /* Garante que a hora tenha espaço */
+    text-align: center;
+}
+
+.consulta-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.consulta-patient-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.consulta-status {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.btn-sm {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Espaço entre botões */
+}
+
+.btn-action-blue {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+
+.btn-action-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-action-red {
+    background-color: var(--secondary-red);
+    color: var(--text-light);
+}
+
+.btn-action-red:hover {
+    background-color: #c82333;
+}
+
+/* Responsividade para a Agenda do Médico */
+@media (max-width: 768px) {
+    .agenda-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .consulta-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+    .consulta-time {
+        width: 100%;
+        text-align: left;
+    }
+    .btn-sm {
+        margin-right: 5px; /* Menos espaço entre botões em telas pequenas */
+        margin-bottom: 5px;
+    }
+}
+
+/* --- Novo CSS para a Página de Atendimento de Consulta do Médico --- */
+
+.consulta-info-header {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+    text-align: center;
+}
+
+.consulta-info-header h3 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.consulta-info-header p {
+    color: var(--text-dark);
+    font-size: 1.1em;
+}
+
+.consulta-info-header span {
+    font-weight: 600;
+}
+
+.atendimento-section {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+}
+
+.atendimento-section h4 {
+    color: var(--secondary-red); /* Título da seção em vermelho para destaque */
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* Estilo para textareas */
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 100px;
+}
+
+textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilo para linhas de formulário com múltiplos inputs */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaço entre os campos */
+    align-items: flex-end; /* Alinha os itens na parte inferior */
+    margin-bottom: 15px; /* Espaço entre as linhas de input/botão */
+}
+
+.form-row .form-group {
+    flex: 1; /* Permite que os campos cresçam */
+    min-width: 150px; /* Largura mínima para cada campo */
+    margin-bottom: 0; /* Remove margin-bottom padrão */
+}
+
+.form-row .flex-grow {
+    flex-grow: 2; /* Cresce mais que os outros */
+}
+
+.form-row .flex-short {
+    flex-grow: 1; /* Cresce menos */
+}
+
+.form-row .btn-add {
+    margin-bottom: 0; /* Alinha o botão com os inputs */
+    padding: 10px 20px;
+    height: 42px; /* Ajusta a altura para alinhar com os inputs */
+    line-height: 22px; /* Alinha o texto do botão */
+}
+
+/* Estilos para as listas de itens adicionados (medicamentos, exames) */
+.added-item-list {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-height: 200px; /* Altura máxima para rolagem */
+    overflow-y: auto; /* Adiciona barra de rolagem se o conteúdo exceder */
+}
+
+.added-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e9ecef;
+    font-size: 0.95em;
+    color: var(--text-dark);
+}
+
+.added-item:last-child {
+    border-bottom: none; /* Remove a borda do último item */
+}
+
+.added-item .item-details {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.added-item .item-remove-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-red);
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.added-item .item-remove-btn:hover {
+    color: #a71d2a;
+}
+
+/* Estilo para o campo select */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: white;
+    appearance: none; /* Remove seta padrão em alguns navegadores */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236c757d'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+select:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos para botões de ação do formulário */
+.form-actions {
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.form-actions .btn-submit,
+.form-actions .btn-secondary {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    min-width: 200px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: var(--text-light);
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .form-row .form-group {
+        width: 100%; /* Ocupa largura total */
+        min-width: unset;
+    }
+    .form-row .btn-add {
+        width: 100%; /* Botão ocupa largura total */
+        margin-top: 10px;
+    }
+    .form-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .form-actions .btn-submit,
+    .form-actions .btn-secondary {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* --- Novo CSS para a Página "Histórico de Pacientes" do Médico --- */
+
+.search-section {
+    margin-bottom: 40px;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-input-group input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1.1em;
+}
+
+.search-input-group input[type="text"]:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.search-input-group .btn-primary {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    min-width: 120px;
+}
+
+.search-results-list {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    max-height: 250px; /* Limita a altura para scroll */
+    overflow-y: auto;
+    padding: 15px;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+}
+
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e9ecef;
+    font-size: 1em;
+    color: var(--text-dark);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item .patient-name {
+    font-weight: 600;
+    margin-right: 15px;
+    flex-grow: 1;
+}
+
+.search-result-item .btn-action-blue {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    min-width: 100px;
+}
+
+.patient-history-details {
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+}
+
+.patient-history-title {
+    color: var(--primary-blue);
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.history-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 25px;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover:not(.active) {
+    color: var(--primary-blue);
+}
+
+.tab-button.active {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.tab-content {
+    display: none; /* Esconde todas as abas por padrão */
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block; /* Mostra a aba ativa */
+}
+
+.tab-content h4 {
+    color: var(--secondary-red);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+.historico-list .historico-item {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary-blue);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px var(--box-shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.historico-list .historico-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--box-shadow-light);
+}
+
+.historico-list .historico-date,
+.historico-list .historico-doctor {
+    font-size: 0.95em;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.historico-list .historico-summary {
+    font-size: 1.05em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.patient-history-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .search-input-group .btn-primary {
+        width: 100%;
+        min-width: unset;
+    }
+    .history-tabs {
+        flex-wrap: wrap;
+    }
+    .tab-button {
+        flex: 1 1 auto; /* Permite que os botões quebrem linha */
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+    .search-result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .search-result-item .btn-action-blue {
+        width: 100%;
+    }
+}
+
+/* --- Novo CSS para a Página "Estoque de Medicamentos" --- */
+
+.table-actions {
+    text-align: right; /* Alinha o botão "Adicionar" à direita */
+    margin-bottom: 20px;
+}
+
+.table-actions .btn-primary {
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.estoque-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre bordas de células */
+    margin-top: 20px;
+    background-color: var(--background-light);
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+    border-radius: 8px; /* Cantos arredondados na tabela */
+    overflow: hidden; /* Garante que os cantos arredondados funcionem com overflow */
+}
+
+.estoque-table th,
+.estoque-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef; /* Linhas divisórias das células */
+}
+
+.estoque-table th {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    position: sticky; /* Fixa o cabeçalho ao rolar */
+    top: 0;
+    z-index: 1; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.estoque-table tbody tr:hover {
+    background-color: #e2f2ff; /* Fundo mais claro ao passar o mouse */
+    cursor: pointer;
+}
+
+.estoque-table .actions-column {
+    width: 1%; /* Garante que a coluna de ações seja o menor possível */
+    white-space: nowrap; /* Impede que os botões quebrem linha */
+}
+
+/* Estilos de status para validade */
+.status-ok {
+    color: #28a745; /* Verde para validade boa */
+    font-weight: 600;
+}
+
+.status-warning {
+    color: #ffc107; /* Amarelo para perto do vencimento */
+    font-weight: 600;
+}
+
+.status-critical {
+    color: var(--secondary-red); /* Vermelho para vencido ou baixo estoque */
+    font-weight: 600;
+}
+
+.estoque-table .btn-sm {
+    margin-right: 5px; /* Espaçamento entre os botões na célula */
+}
+
+/* Responsividade da tabela */
+@media (max-width: 768px) {
+    .estoque-table thead {
+        display: none; /* Esconde o cabeçalho da tabela em telas pequenas */
+    }
+
+    .estoque-table, .estoque-table tbody, .estoque-table tr, .estoque-table td {
+        display: block; /* Faz cada linha e célula se comportar como um bloco */
+        width: 100%;
+    }
+
+    .estoque-table tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px var(--box-shadow-light);
+        padding: 15px;
+    }
+
+    .estoque-table td {
+        text-align: right;
+        padding-left: 50%; /* Espaço para o label virtual */
+        position: relative;
+        border-bottom: 1px dashed #e9ecef;
+    }
+
+    .estoque-table td:last-child {
+        border-bottom: none;
+    }
+
+    .estoque-table td::before {
+        content: attr(data-label); /* Usa o atributo data-label para criar um label */
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--primary-blue);
+    }
+    
+    /* Ajustes para a coluna de ações em mobile */
+    .estoque-table td[data-label="Ações"] {
+        text-align: center;
+        padding-left: 15px; /* Não precisa de padding para label virtual aqui */
+    }
+
+    .estoque-table td[data-label="Ações"]::before {
+        display: none; /* Esconde o label virtual para ações */
+    }
+}
+
+/* --- Novo CSS para o Cabeçalho (Header) --- */
+
+.header {
+    background-color: var(--primary-blue); /* Fundo azul do cabeçalho */
+    color: var(--text-light);
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column; /* Para a barra superior e menu principal ficarem um em cima do outro */
+    width: 90%; /* Ajusta a largura para o conteúdo do cabeçalho */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.top-bar-info {
+    display: flex;
+    justify-content: flex-end; /* Alinha os itens à direita */
+    align-items: center;
+    font-size: 0.85em;
+    padding-bottom: 5px; /* Espaço entre a barra superior e o menu principal */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória sutil */
+    margin-bottom: 10px;
+}
+
+.top-bar-info .info-item {
+    margin-left: 20px;
+}
+
+.top-bar-info .nav-link {
+    color: var(--text-light); /* Cor do link "Sair" */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-flex; /* Para alinhar ícone e texto */
+    align-items: center;
+    gap: 5px;
+}
+
+.top-bar-info .nav-link:hover {
+    color: var(--secondary-red); /* Mudar para vermelho ao passar o mouse */
+}
+
+.main-header-content {
+    display: flex;
+    justify-content: space-between; /* Logo à esquerda, menu à direita */
+    align-items: center;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+.logo-container {
+    flex-shrink: 0; /* Impede que a logo encolha */
+    margin-right: 20px; /* Espaço à direita da logo */
+}
+
+.hospital-logo {
+    font-size: 1.8em; /* Tamanho da fonte para o nome do hospital */
+    font-weight: 700;
+    color: var(--text-light);
+    text-decoration: none; /* Remove sublinhado do link */
+    padding: 5px 0;
+    white-space: nowrap; /* Garante que o nome não quebre linha */
+}
+
+/* Se você usar uma imagem para a logo */
+.hospital-logo-img {
+    height: 50px; /* Ajuste conforme a altura da sua logo */
+    width: auto;
+    display: block;
+}
+
+.nav-main-menu {
+    display: flex;
+    gap: 30px; /* Espaço entre os itens do menu principal */
+    flex-wrap: wrap; /* Permite quebrar linha se o menu for muito grande */
+    justify-content: flex-end; /* Alinha os links à direita */
+}
+
+.nav-main-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-main-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-red); /* Linha vermelha ao passar o mouse */
+    transition: width 0.3s ease;
+}
+
+.nav-main-link:hover {
+    color: var(--secondary-red); /* Mudar cor do texto ao passar o mouse */
+}
+
+.nav-main-link:hover::after,
+.nav-main-link.active::after { /* Futuramente, se quiser um link ativo */
+    width: 100%;
+}
+
+/* Responsividade para o novo cabeçalho */
+@media (max-width: 768px) {
+    .header-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .top-bar-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    .top-bar-info .info-item {
+        margin-left: 0;
+    }
+
+    .main-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .logo-container {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .nav-main-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%; /* Ocupa a largura total para os links ficarem um abaixo do outro */
+    }
+
+    .nav-main-link {
+        width: 100%; /* Garante que o link ocupe toda a largura */
+        padding: 5px 0;
+    }
+}
+
+/* --- Novo CSS para o Dashboard do Paciente --- */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Colunas flexíveis */
+    gap: 25px; /* Espaçamento entre os cards */
+    margin-top: 40px;
+}
+
+.dashboard-card {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card.action-card {
+    cursor: pointer; /* Indica que o card é clicável */
+}
+
+.dashboard-icon {
+    font-size: 3em;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+.dashboard-card h3 {
+    color: var(--text-dark);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.dashboard-card p {
+    color: #6c757d;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Responsividade para o grid do dashboard */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+    .dashboard-card {
+        padding: 25px;
+    }
+}
+
+/* --- Novo CSS para a Página de Agendar Consulta do Paciente --- */
+
+.appointment-form {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.appointment-form .form-section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef; /* Separador de seções */
+}
+
+.appointment-form .form-section:last-child {
+    border-bottom: none; /* Remove borda da última seção */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.appointment-form h3 {
+    color: var(--primary-blue);
+    font-size: 1.6em;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--secondary-red); /* Sublinhado para os títulos das seções */
+    display: inline-block; /* Ajusta a largura do sublinhado ao texto */
+    padding-bottom: 5px;
+}
+
+.appointment-form .form-group {
+    margin-bottom: 25px;
+}
+
+.appointment-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.05em;
+}
+
+.appointment-form select,
+.appointment-form input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-dark);
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -webkit-appearance: none; /* Remove estilo padrão do select em navegadores webkit */
+    -moz-appearance: none; /* Remove estilo padrão do select em navegadores firefox */
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2C188.4L146.2%2C3.6c-4.4-4.8-10.8-3.6-15.2%2C0L5.4%2C188.4c-4.8%2C4.4-3.6%2C10.8%2C0%2C15.2c4.4%2C4.8%2C10.8%2C3.6%2C15.2%2C0l125.7-137.9l125.7%2C137.9c4.4%2C4.8%2C10.8%2C3.6%2C15.2%2C0c4.8-4.4%2C3.6-10.8%2C0-15.2z%22%2F%3E%3C%2Fsvg%3E'); /* Seta para selects */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+}
+
+.appointment-form select:disabled,
+.appointment-form input[type="date"]:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.appointment-form select:focus,
+.appointment-form input[type="date"]:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* 100px é o min-width para o botão */
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.horario-btn {
+    background-color: #e9ecef;
+    color: var(--text-dark);
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Evita quebra de linha em horários */
+    text-align: center;
+}
+
+.horario-btn:hover {
+    background-color: #d1e7ff;
+    border-color: var(--primary-blue);
+}
+
+.horario-btn.selected {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border-color: var(--primary-blue);
+}
+
+.horario-btn:disabled {
+    background-color: #f1f3f5;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border-color: #ced4da;
+}
+
+.no-times-message {
+    grid-column: 1 / -1; /* Ocupa todas as colunas do grid */
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #ced4da;
+}
+
+/* Ajustes para botões de submissão do formulário */
+.appointment-form .btn-submit {
+    width: auto; /* Permite que o botão tenha a largura do conteúdo */
+    padding: 15px 30px;
+    font-size: 1.2em;
+    margin-top: 30px;
+    display: block; /* Ocupa a largura total do pai */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px; /* Limita a largura do botão de agendar */
+}
+
+/* Responsividade do formulário */
+@media (max-width: 600px) {
+    .appointment-form {
+        padding: 20px;
+    }
+    .appointment-form h3 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    .horarios-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+}
+/* --- Novo CSS para o Index.html (Página Inicial) --- */
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: calc(100vh - 180px); /* Altura mínima ajustada para o header e footer */
+    padding: 40px 20px; /* Adiciona padding para telas pequenas */
+}
+
+.homepage-card {
+    max-width: 800px;
+    padding: 50px;
+}
+
+.welcome-heading {
+    font-size: 3em;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1.2em;
+    color: var(--text-dark);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.access-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    margin-top: 30px;
+}
+
+.option-card {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 35px;
+    flex: 1; /* Permite que os cards cresçam */
+    min-width: 280px; /* Largura mínima para cada card */
+    max-width: 380px; /* Largura máxima para cada card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.access-icon {
+    font-size: 4em;
+    color: var(--secondary-red); /* Ícone vermelho */
+    margin-bottom: 20px;
+}
+
+.option-card h2 {
+    font-size: 2em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.option-card p {
+    color: #6c757d;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Garante que o parágrafo ocupe espaço e empurre o botão para baixo */
+}
+
+.btn-access {
+    width: 100%; /* Botão ocupa a largura total do card */
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* Novos estilos para botões no nav-main-menu (médico/paciente) */
+.nav-main-menu .btn-small-primary {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border: 1px solid var(--primary-blue);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px; /* Espaçamento entre os botões */
+}
+
+.nav-main-menu .btn-small-primary:hover {
+    background-color: var(--darker-blue);
+    border-color: var(--darker-blue);
+    color: var(--text-light); /* Garante que a cor não mude para a do link padrão */
+}
+
+.nav-main-menu .btn-small-ghost {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px; /* Espaçamento entre os botões */
+}
+
+.nav-main-menu .btn-small-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-light); /* Garante que a cor não mude para a do link padrão */
+}
+
+/* Responsividade para o index.html */
+@media (max-width: 768px) {
+    .homepage-card {
+        padding: 30px;
+    }
+    .welcome-heading {
+        font-size: 2.2em;
+    }
+    .hero-description {
+        font-size: 1em;
+    }
+    .access-options {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .option-card {
+        width: 100%;
+        max-width: unset; /* Remove max-width para ocupar toda a largura disponível */
+    }
+    .nav-main-menu .btn-small-primary,
+    .nav-main-menu .btn-small-ghost {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%; /* Ficam 100% de largura no menu responsivo */
+        justify-content: center; /* Centraliza conteúdo nos botões */
+    }
+}
+
+/* --- Novo CSS para a Página de Serviços --- */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Colunas flexíveis para os cards */
+    gap: 25px; /* Espaçamento entre os cards */
+    margin-top: 40px;
+}
+
+.service-card {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex; /* Para alinhar o conteúdo verticalmente */
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha ícone e título ao topo */
+    align-items: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-icon {
+    font-size: 3.5em;
+    color: var(--secondary-red); /* Cor dos ícones de serviço */
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: var(--primary-blue);
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: #6c757d;
+    font-size: 1em;
+    line-height: 1.6;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+}
+
+/* Responsividade para o grid de serviços */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+    .service-card {
+        padding: 25px;
+    }
+}
+
+/* --- Novo CSS para a Página "Sobre Nós" --- */
+
+.about-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef; /* Separador entre seções */
+}
+
+.about-section:first-of-type {
+    border-top: none; /* Remove borda do primeiro item */
+    margin-top: 20px;
+    padding-top: 0;
+}
+
+.about-section h3 {
+    color: var(--primary-blue);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-red);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.about-section p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+}
+
+.values-list {
+    list-style: none; /* Remove marcadores de lista padrão */
+    padding: 0;
+    margin-top: 20px;
+}
+
+.values-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.value-icon {
+    font-size: 1.5em;
+    color: var(--secondary-red);
+    margin-right: 15px;
+    min-width: 30px; /* Garante alinhamento dos ícones */
+    text-align: center;
+}
+
+/* Responsividade para a página Sobre Nós */
+@media (max-width: 768px) {
+    .about-section h3 {
+        font-size: 1.5em;
+    }
+    .about-section p {
+        font-size: 0.95em;
+    }
+    .values-list li {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .value-icon {
+        font-size: 1.3em;
+        margin-right: 10px;
+        min-width: 25px;
+    }
+}
+
+/* --- Novo CSS para a Página de Contato --- */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Coluna para info e coluna para formulário */
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.contact-info-section,
+.contact-form-section {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.contact-info-section h3,
+.contact-form-section h3 {
+    color: var(--primary-blue);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-red);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.info-item-contact {
+    display: flex;
+    align-items: flex-start; /* Alinha o ícone e o texto ao topo */
+    margin-bottom: 15px;
+    color: var(--text-dark);
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+.contact-icon {
+    font-size: 1.5em;
+    color: var(--secondary-red);
+    margin-right: 15px;
+    min-width: 25px; /* Garante que os ícones tenham largura mínima */
+    text-align: center;
+}
+
+.info-item-contact p {
+    margin: 0; /* Remove margem padrão de parágrafo dentro do item */
+}
+
+.contact-info-section p { /* Estilo para os parágrafos de horário */
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.05em;
+    line-height: 1.5;
+}
+
+.map-container {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden; /* Garante que o iframe respeite o border-radius */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    display: block; /* Remove espaço extra abaixo do iframe */
+}
+
+/* Formulário de Contato */
+.contact-form-section .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.contact-form-section input[type="text"],
+.contact-form-section input[type="email"],
+.contact-form-section textarea {
+    width: calc(100% - 24px); /* Ajusta para padding */
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    color: var(--text-dark);
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical; /* Permite redimensionar verticalmente o textarea */
+}
+
+.contact-form-section input[type="text"]:focus,
+.contact-form-section input[type="email"]:focus,
+.contact-form-section textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.contact-form-section .btn-submit {
+    width: auto;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 250px;
+}
+
+/* Responsividade para a página de Contato */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-info-section,
+    .contact-form-section {
+        padding: 20px;
+    }
+    .contact-info-section h3,
+    .contact-form-section h3 {
+        font-size: 1.5em;
+    }
+    .info-item-contact,
+    .contact-info-section p,
+    .contact-form-section label,
+    .contact-form-section input,
+    .contact-form-section textarea {
+        font-size: 0.95em;
+    }
+}
+
+/* --- Novo CSS para a Página "Meu Histórico" do Paciente --- */
+
+.sub-nav-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    flex-wrap: wrap; /* Permite quebras de linha em telas pequenas */
+    gap: 10px; /* Espaçamento entre as abas */
+}
+
+.sub-nav-tabs .tab-link {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 1.1em;
+    border-radius: 8px 8px 0 0; /* Bordas arredondadas no topo */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+    border-bottom: none; /* Remove borda inferior para que o border-bottom do pai apareça */
+}
+
+.sub-nav-tabs .tab-link:hover {
+    background-color: #f0f8ff;
+    color: var(--primary-blue);
+}
+
+.sub-nav-tabs .tab-link.active {
+    background-color: var(--background-light);
+    color: var(--primary-blue);
+    border-color: var(--border-color);
+    border-bottom-color: var(--background-light); /* Para "elevar" a aba ativa */
+    position: relative;
+    z-index: 1; /* Garante que a aba ativa fique sobre a borda inferior */
+}
+
+.history-section {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.history-section h3 {
+    color: var(--primary-blue);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-red);
+    display: inline-flex; /* Para alinhar ícone e texto */
+    align-items: center;
+    padding-bottom: 5px;
+    gap: 10px; /* Espaço entre ícone e texto */
+}
+
+.section-icon {
+    font-size: 1.2em;
+    color: var(--secondary-red);
+}
+
+.history-section p {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Estilos para cards de consulta individual (dentro da lista de consultas) */
+.consultas-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.consultas-card h4 {
+    color: var(--primary-blue);
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+}
+
+.consultas-card h4 span.date {
+    color: var(--text-dark);
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.consultas-card h5 {
+    color: var(--secondary-red);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.consultas-card p {
+    color: #495057;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.consultas-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    border-top: 1px dashed #ced4da;
+    padding-top: 15px;
+}
+
+.consultas-card ul li {
+    margin-bottom: 5px;
+    color: #495057;
+    font-size: 0.95em;
+}
+
+.consultas-card .btn-outline-secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.consultas-card .btn-outline-secondary:hover {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+
+/* Estilos de Tabela (para Exames, Receitas, Atestados) */
+.table-responsive {
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--background-light);
+    border-radius: 10px;
+    overflow: hidden; /* Para border-radius nas tabelas */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    color: var(--text-dark);
+}
+
+.data-table th {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f0f8ff; /* Fundo leve ao passar o mouse */
+}
+
+.data-table .btn-download {
+    background-color: var(--secondary-red);
+    color: var(--text-light);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Para links */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.data-table .btn-download:hover {
+    background-color: var(--darker-red);
+}
+
+.data-table .no-data {
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    color: #6c757d;
+}
+
+.loading-message {
+    text-align: center;
+    padding: 30px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsividade para o histórico */
+@media (max-width: 768px) {
+    .sub-nav-tabs .tab-link {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+    .history-section {
+        padding: 20px;
+    }
+    .history-section h3 {
+        font-size: 1.5em;
+    }
+    .data-table th,
+    .data-table td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .consultas-card {
+        padding: 15px;
+    }
+    .consultas-card h4 {
+        font-size: 1.1em;
+    }
+    .consultas-card h5 {
+        font-size: 1em;
+    }
+    .consultas-card p,
+    .consultas-card ul li {
+        font-size: 0.85em;
+    }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque de Medicamentos - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Estoque de Medicamentos</h1>
+            <nav class="nav-menu">
+                <span class="nav-text">Dr(a). <span id="medicoNomeDisplayEstoque"></span></span>
+                <a href="medico_dashboard.html" class="nav-link">Dashboard</a>
+                <a href="medico_agenda.html" class="nav-link">Minha Agenda</a>
+                <a href="medico_historico_paciente.html" class="nav-link">Pacientes</a>
+                <a href="logout.html" class="nav-link">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Gestão de Estoque de Medicamentos</h2>
+            <p class="description-text">Visualize e gerencie os medicamentos disponíveis no estoque do hospital.</p>
+
+            <div class="search-section">
+                <div class="form-group search-input-group">
+                    <input type="text" id="medicamentoSearchInput" placeholder="Pesquisar medicamento por nome ou princípio ativo..." autocomplete="off">
+                    <button type="button" class="btn-primary" id="searchMedicamentoBtn">Buscar</button>
+                </div>
+            </div>
+
+            <div class="estoque-table-section">
+                <div class="table-actions">
+                    <button class="btn-primary" id="addMedicamentoBtn">Adicionar Novo Medicamento</button>
+                    </div>
+                
+                <div class="table-responsive">
+                    <table class="estoque-table">
+                        <thead>
+                            <tr>
+                                <th>Medicamento</th>
+                                <th>Concentração</th>
+                                <th>Quantidade</th>
+                                <th>Validade</th>
+                                <th class="actions-column">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="estoqueTableBody">
+                            </tbody>
+                    </table>
+                </div>
+                <p id="noMedicamentosMessage" style="display: none; text-align: center; color: #6c757d; margin-top: 20px;">Nenhum medicamento encontrado no estoque.</p>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="estoque_medicamentos.js"></script> </body>
+</html>

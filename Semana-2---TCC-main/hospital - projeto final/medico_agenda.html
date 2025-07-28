@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Agenda - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header class="header">
+    <div class="container header-container">
+        <div class="top-bar-info">
+            <span class="info-item">Bem-vindo(a), Dr(a). <span id="medicoNomeDisplay"></span></span>
+            <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+            <a href="logout.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+        <div class="main-header-content">
+            <div class="logo-container">
+                <a href="medico_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+            
+            <nav class="nav-main-menu">
+                <a href="medico_dashboard.html" class="nav-main-link">Dashboard</a>
+                <a href="medico_agenda.html" class="nav-main-link">Minha Agenda</a>
+                <a href="medico_historico_paciente.html" class="nav-main-link">Pacientes</a>
+                <a href="estoque_medicamentos.html" class="nav-main-link">Estoque</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Sua Agenda de Consultas</h2>
+            <p class="description-text">Selecione uma data para visualizar suas consultas agendadas.</p>
+
+            <div class="agenda-controls">
+                <label for="agendaDate">Selecionar Data:</label>
+                <input type="date" id="agendaDate" name="agendaDate">
+            </div>
+
+            <div class="agenda-list-section">
+                <h3>Consultas para <span id="selectedDateDisplay"></span></h3>
+                <div id="noConsultasMessage" class="no-agenda-message" style="display: none;">
+                    <p>Nenhuma consulta agendada para esta data.</p>
+                </div>
+                <div id="consultasList" class="consultas-list">
+                    </div>
+            </div>
+
+            </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="medico_agenda.js"></script> </body>
+</html>

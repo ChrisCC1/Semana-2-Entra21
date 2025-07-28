@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login do Médico - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Acesso para Médicos</h1>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container form-card">
+            <h2>Faça Login como Médico</h2>
+            <form id="medicoLoginForm" class="login-form">
+                <div class="form-group">
+                    <label for="medicoIdentificador">CRM</label>
+                    <input type="text" id="medicoIdentificador" name="medicoIdentificador" placeholder="Coloque seu CRM" required>
+                    <div class="error-message" id="medicoIdentificadorError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="medicoSenha">Senha</label>
+                    <input type="password" id="medicoSenha" name="medicoSenha" placeholder="Sua senha" required>
+                    <div class="error-message" id="medicoSenhaError"></div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Entrar</button>
+            </form>
+            <p class="login-link">Não é médico? <a href="index.html">Acesse como Paciente</a></p>
+            <p class="login-link"><a href="#">Esqueceu sua senha?</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> <script src="medico_login.js"></script> </body>
+</html>

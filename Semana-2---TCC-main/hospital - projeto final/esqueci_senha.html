@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci Minha Senha - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Recuperação de Senha</h1>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container form-card">
+            <h2>Redefinir Senha</h2>
+            <p class="description-text">Por favor, digite seu e-mail para receber as instruções de recuperação de senha.</p>
+            <form id="forgotPasswordForm" class="login-form">
+                <div class="form-group">
+                    <label for="emailRecuperacao">E-mail</label>
+                    <input type="email" id="emailRecuperacao" name="emailRecuperacao" placeholder="seu.email@exemplo.com" required>
+                    <div class="error-message" id="emailRecuperacaoError"></div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Enviar Instruções</button>
+            </form>
+            <p class="login-link">Lembrou da senha? <a href="index.html">Faça Login</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> 
+    <script src="esqueci_senha.js"></script> </body>
+</html>

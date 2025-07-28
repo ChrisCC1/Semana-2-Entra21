@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - MedCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="top-bar-info">
+                <span class="info-item"><i class="fa-solid fa-phone"></i> (XX) XXXX-XXXX</span>
+                <span class="info-item"><i class="fa-solid fa-envelope"></i> contato@hospitalconnect.com</span>
+                <span class="info-item">Atendimento 24h</span>
+            </div>
+
+            <div class="main-header-content">
+                <div class="logo-container">
+                    <a href="index.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+                
+                <nav class="nav-main-menu">
+                    <a href="index.html" class="nav-main-link">Início</a>
+                    <a href="servicos.html" class="nav-main-link">Serviços</a>
+                    <a href="sobre.html" class="nav-main-link">Sobre Nós</a>
+                    <a href="contato.html" class="nav-main-link active">Contato</a> <a href="medico_login.html" class="nav-main-link btn-small-ghost"><i class="fa-solid fa-user-doctor"></i> Médico</a>
+                    <a href="paciente_login.html" class="nav-main-link btn-small-primary"><i class="fa-solid fa-user-injured"></i> Paciente</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Fale Conosco</h2>
+            <p class="description-text">
+                Estamos à disposição para atender suas dúvidas, sugestões ou necessidades. 
+                Utilize os canais abaixo para entrar em contato.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-info-section">
+                    <h3>Nossas Informações</h3>
+                    <div class="info-item-contact">
+                        <i class="fa-solid fa-location-dot contact-icon"></i>
+                        <p>Rua Principal, 123 - Centro, Blumenau - SC</p>
+                    </div>
+                    <div class="info-item-contact">
+                        <i class="fa-solid fa-phone contact-icon"></i>
+                        <p>(47) XXXX-XXXX</p>
+                    </div>
+                    <div class="info-item-contact">
+                        <i class="fa-solid fa-mobile-alt contact-icon"></i>
+                        <p>(47) 9XXXX-XXXX (WhatsApp)</p>
+                    </div>
+                    <div class="info-item-contact">
+                        <i class="fa-solid fa-envelope contact-icon"></i>
+                        <p>contato@hospitalconnect.com</p>
+                    </div>
+
+                    <h3>Horário de Atendimento</h3>
+                    <p>
+                        **Recepção e Administrativo:**<br>
+                        Segunda a Sexta: 08:00 às 18:00
+                    </p>
+                    <p>
+                        **Pronto Atendimento:**<br>
+                        24 horas por dia, 7 dias por semana
+                    </p>
+
+                    <h3 style="margin-top: 30px;">Onde Estamos</h3>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14234.33140673468!2d-49.071732649999995!3d-26.91689395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df18a287e07677%3A0xd6895311e3b6d47b!2sBlumenau%2C%20SC!5e0!3m2!1spt-BR!2sbr!4v1701700000000!5m2!1spt-BR!2sbr" 
+                            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h3>Envie uma Mensagem</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nome">Seu Nome:</label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                            <div class="error-message" id="nomeError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Seu E-mail:</label>
+                            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="assunto">Assunto:</label>
+                            <input type="text" id="assunto" name="assunto" placeholder="Assunto da mensagem" required>
+                            <div class="error-message" id="assuntoError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem:</label>
+                            <textarea id="mensagem" name="mensagem" rows="6" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                            <div class="error-message" id="mensagemError"></div>
+                        </div>
+                        <button type="submit" class="btn-primary btn-submit">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="contato.js"></script>
+</body>
+</html>

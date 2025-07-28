@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atendimento de Consulta - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+    <div class="container header-container">
+        <div class="top-bar-info">
+            <span class="info-item">Bem-vindo(a), Dr(a). <span id="medicoNomeDisplay"></span></span>
+            <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+            <a href="logout.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+        <div class="main-header-content">
+            <div class="logo-container">
+                <a href="medico_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+            
+            <nav class="nav-main-menu">
+                <a href="medico_dashboard.html" class="nav-main-link">Dashboard</a>
+                <a href="medico_agenda.html" class="nav-main-link">Minha Agenda</a>
+                <a href="medico_historico_paciente.html" class="nav-main-link">Pacientes</a>
+                <a href="estoque_medicamentos.html" class="nav-main-link">Estoque</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Detalhes do Atendimento</h2>
+            <p class="description-text">Preencha as informações da consulta e registre o atendimento.</p>
+
+            <div class="consulta-info-header">
+                <h3>Consulta Atual: <span id="infoPacienteNome">Paciente: [Nome do Paciente]</span></h3>
+                <p>Data: <span id="infoConsultaData">XX/XX/XXXX</span> | Hora: <span id="infoConsultaHora">HH:MM</span></p>
+            </div>
+
+            <form id="atendimentoForm">
+                <section class="atendimento-section">
+                    <h4>1. Anamnese e Evolução</h4>
+                    <div class="form-group">
+                        <label for="anamnese">Anamnese (Histórico do Paciente):</label>
+                        <textarea id="anamnese" name="anamnese" rows="6" placeholder="Descreva o histórico de saúde do paciente, sintomas, etc." required></textarea>
+                        <div class="error-message" id="anamneseError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="evolucao">Evolução Clínica:</label>
+                        <textarea id="evolucao" name="evolucao" rows="6" placeholder="Descreva a evolução do quadro clínico do paciente durante a consulta." required></textarea>
+                        <div class="error-message" id="evolucaoError"></div>
+                    </div>
+                </section>
+
+                <section class="atendimento-section">
+                    <h4>2. Diagnóstico</h4>
+                    <div class="form-group">
+                        <label for="diagnostico">Diagnóstico (CID-10, se aplicável):</label>
+                        <input type="text" id="diagnostico" name="diagnostico" placeholder="Ex: R05 - Tosse">
+                        <div class="error-message" id="diagnosticoError"></div>
+                    </div>
+                </section>
+
+                <section class="atendimento-section prescription-section">
+                    <h4>3. Prescrição Médica</h4>
+                    <div id="medicamentosList">
+                        </div>
+                    <div class="form-row">
+                        <div class="form-group flex-grow">
+                            <label for="medicamento">Medicamento:</label>
+                            <input type="text" id="medicamento" placeholder="Nome do medicamento">
+                        </div>
+                        <div class="form-group flex-short">
+                            <label for="dosagem">Dosagem:</label>
+                            <input type="text" id="dosagem" placeholder="Ex: 500mg">
+                        </div>
+                        <div class="form-group flex-grow">
+                            <label for="posologia">Posologia:</label>
+                            <input type="text" id="posologia" placeholder="Ex: 1 comprimido a cada 8 horas por 7 dias">
+                        </div>
+                        <button type="button" class="btn-sm btn-action-blue btn-add" id="addMedicamento">Adicionar</button>
+                    </div>
+                </section>
+
+                <section class="atendimento-section exams-section">
+                    <h4>4. Solicitação de Exames</h4>
+                    <div id="examesList">
+                        </div>
+                    <div class="form-row">
+                        <div class="form-group flex-grow">
+                            <label for="exameNome">Nome do Exame:</label>
+                            <input type="text" id="exameNome" placeholder="Ex: Hemograma completo">
+                        </div>
+                        <div class="form-group flex-grow">
+                            <label for="exameJustificativa">Justificativa (Opcional):</label>
+                            <input type="text" id="exameJustificativa" placeholder="Ex: Investigação de anemia">
+                        </div>
+                        <button type="button" class="btn-sm btn-action-blue btn-add" id="addExame">Adicionar</button>
+                    </div>
+                </section>
+
+                <section class="atendimento-section certificate-section">
+                    <h4>5. Atestado / Declaração</h4>
+                    <div class="form-group">
+                        <label for="tipoDocumento">Tipo de Documento:</label>
+                        <select id="tipoDocumento" name="tipoDocumento">
+                            <option value="">Selecione</option>
+                            <option value="atestado">Atestado Médico</option>
+                            <option value="declaracao">Declaração de Comparecimento</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="diasAfastamento">Dias de Afastamento (se atestado):</label>
+                        <input type="number" id="diasAfastamento" name="diasAfastamento" min="0" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="textoAtestado">Texto Adicional / Observações:</label>
+                        <textarea id="textoAtestado" name="textoAtestado" rows="4" placeholder="Observações específicas para o documento..."></textarea>
+                    </div>
+                    <button type="button" class="btn-primary" id="gerarAtestado">Gerar Atestado/Declaração (PDF)</button>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Salvar Atendimento</button>
+                    <button type="button" class="btn-secondary" id="finalizarConsulta">Finalizar Consulta</button>
+                </div>
+            </form>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="medico_atendimento_consulta.js"></script> </body>
+</html>

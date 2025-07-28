@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Histórico - MedCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="top-bar-info">
+                <span class="info-item">Bem-vindo(a), <span id="pacienteNomeDisplayHistorico"></span></span>
+                <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+                <a href="paciente_login.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+            <div class="main-header-content">
+                <div class="logo-container">
+                    <a href="paciente_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+                
+                <nav class="nav-main-menu">
+                    <a href="paciente_dashboard.html" class="nav-main-link">Dashboard</a>
+                    <a href="paciente_agendar_consulta.html" class="nav-main-link">Agendar Consulta</a>
+                    <a href="paciente_historico.html" class="nav-main-link active">Meu Histórico</a>
+                    <a href="#" class="nav-main-link">Exames/Receitas</a> </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Meu Histórico Médico</h2>
+            <p class="description-text">
+                Aqui você pode visualizar suas consultas anteriores, exames, receitas e atestados.
+            </p>
+
+            <nav class="sub-nav-tabs">
+                <a href="#consultas-anteriores" class="tab-link active" data-target="consultas-anteriores">Consultas Anteriores</a>
+                <a href="#exames" class="tab-link" data-target="exames">Exames</a>
+                <a href="#receitas" class="tab-link" data-target="receitas">Receitas</a>
+                <a href="#atestados" class="tab-link" data-target="atestados">Atestados</a>
+            </nav>
+
+            <div class="history-section" id="consultas-anteriores">
+                <h3><i class="fa-solid fa-calendar-check section-icon"></i> Consultas Anteriores</h3>
+                <p>Confira o registro de suas consultas passadas, diagnósticos e observações.</p>
+                <div id="consultasList">
+                    <p class="loading-message">Carregando consultas...</p>
+                </div>
+            </div>
+
+            <div class="history-section" id="exames" style="display: none;">
+                <h3><i class="fa-solid fa-flask section-icon"></i> Meus Exames</h3>
+                <p>Acesse e baixe os resultados dos seus exames laboratoriais e de imagem.</p>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo de Exame</th>
+                                <th>Médico Solicitante</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examesTableBody">
+                            <tr><td colspan="4" class="no-data">Nenhum exame encontrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="history-section" id="receitas" style="display: none;">
+                <h3><i class="fa-solid fa-prescription-bottle-medical section-icon"></i> Minhas Receitas</h3>
+                <p>Visualize e imprima suas receitas médicas.</p>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Médico</th>
+                                <th>Medicamentos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receitasTableBody">
+                            <tr><td colspan="4" class="no-data">Nenhuma receita encontrada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="history-section" id="atestados" style="display: none;">
+                <h3><i class="fa-solid fa-file-medical section-icon"></i> Meus Atestados</h3>
+                <p>Acesse e baixe seus atestados médicos.</p>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Médico</th>
+                                <th>Período</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="atestadosTableBody">
+                            <tr><td colspan="4" class="no-data">Nenhum atestado encontrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="paciente_historico.js"></script>
+</body>
+</html>

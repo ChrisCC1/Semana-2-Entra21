@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Pacientes - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+    <div class="container header-container">
+        <div class="top-bar-info">
+            <span class="info-item">Bem-vindo(a), Dr(a). <span id="medicoNomeDisplay"></span></span>
+            <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+            <a href="logout.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+        <div class="main-header-content">
+            <div class="logo-container">
+                <a href="medico_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+            
+            <nav class="nav-main-menu">
+                <a href="medico_dashboard.html" class="nav-main-link">Dashboard</a>
+                <a href="medico_agenda.html" class="nav-main-link">Minha Agenda</a>
+                <a href="medico_historico_paciente.html" class="nav-main-link">Pacientes</a>
+                <a href="estoque_medicamentos.html" class="nav-main-link">Estoque</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Pesquisar e Acessar Histórico de Pacientes</h2>
+            <p class="description-text">Utilize a barra de pesquisa para encontrar pacientes por nome ou CPF.</p>
+
+            <div class="search-section">
+                <div class="form-group search-input-group">
+                    <input type="text" id="patientSearchInput" placeholder="Pesquisar paciente por nome ou CPF..." autocomplete="off">
+                    <button type="button" class="btn-primary" id="searchPatientBtn">Buscar</button>
+                </div>
+                <div id="searchResults" class="search-results-list">
+                    <p id="noResultsMessage" style="display: none; text-align: center; color: #6c757d;">Nenhum paciente encontrado.</p>
+                </div>
+            </div>
+
+            <div id="patientHistoryDetails" class="patient-history-details" style="display: none;">
+                <h3 class="patient-history-title">Histórico de <span id="selectedPatientName"></span></h3>
+                <div class="history-tabs">
+                    <button class="tab-button active" data-tab="consultas">Consultas</button>
+                    <button class="tab-button" data-tab="exames">Exames</button>
+                    <button class="tab-button" data-tab="receitas">Receitas</button>
+                    </div>
+
+                <div id="tabContent-consultas" class="tab-content active">
+                    <h4>Consultas Realizadas</h4>
+                    <div id="consultasHistoricoList" class="historico-list">
+                        <div class="historico-item">
+                            <div class="historico-date">Data: 15/05/2025</div>
+                            <div class="historico-doctor">Médico: Dr(a). João Santos</div>
+                            <p class="historico-summary">Motivo: Dor de cabeça persistente. Diagnóstico: Cefaleia tensional. Prescrição: Analgésico.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Receita/Documentos</button>
+                        </div>
+                        <div class="historico-item">
+                            <div class="historico-date">Data: 01/03/2025</div>
+                            <div class="historico-doctor">Médico: Dr(a). Maria Oliveira</div>
+                            <p class="historico-summary">Motivo: Check-up anual. Sem alterações significativas.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Exames</button>
+                        </div>
+                    </div>
+                    <p id="noConsultasHistorico" style="display: none; text-align: center; color: #6c757d;">Nenhuma consulta no histórico.</p>
+                </div>
+
+                <div id="tabContent-exames" class="tab-content">
+                    <h4>Exames Realizados</h4>
+                    <div id="examesHistoricoList" class="historico-list">
+                         <div class="historico-item">
+                            <div class="historico-date">Data: 05/03/2025</div>
+                            <p class="historico-summary">Exame: Hemograma Completo. Resultado: Normal.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Laudo</button>
+                        </div>
+                        <div class="historico-item">
+                            <div class="historico-date">Data: 20/01/2025</div>
+                            <p class="historico-summary">Exame: Glicemia em Jejum. Resultado: 95 mg/dL.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Laudo</button>
+                        </div>
+                    </div>
+                    <p id="noExamesHistorico" style="display: none; text-align: center; color: #6c757d;">Nenhum exame no histórico.</p>
+                </div>
+
+                <div id="tabContent-receitas" class="tab-content">
+                    <h4>Receitas Emitidas</h4>
+                    <div id="receitasHistoricoList" class="historico-list">
+                        <div class="historico-item">
+                            <div class="historico-date">Data: 15/05/2025</div>
+                            <p class="historico-summary">Medicamento: Paracetamol 500mg. Posologia: 1 comprimido a cada 8h.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Receita</button>
+                        </div>
+                        <div class="historico-item">
+                            <div class="historico-date">Data: 01/03/2025</div>
+                            <p class="historico-summary">Medicamento: Amoxicilina 875mg. Posologia: 1 cápsula a cada 12h.</p>
+                            <button class="btn-sm btn-action-blue btn-view-document">Ver Receita</button>
+                        </div>
+                    </div>
+                    <p id="noReceitasHistorico" style="display: none; text-align: center; color: #6c757d;">Nenhuma receita no histórico.</p>
+                </div>
+
+                <div class="form-actions patient-history-actions">
+                    <button type="button" class="btn-primary">Adicionar Novo Documento</button>
+                    </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="medico_historico_paciente.js"></script> </body>
+</html>

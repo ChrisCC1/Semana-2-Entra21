@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Médico - MedCare</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header class="header">
+    <div class="container header-container">
+        <div class="top-bar-info">
+            <span class="info-item">Bem-vindo(a), Dr(a). <span id="medicoNomeDisplay"></span></span>
+            <span class="info-item">Contato: (XX) XXXX-XXXX</span>
+            <a href="logout.html" class="info-item nav-link">Sair <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+        <div class="main-header-content">
+            <div class="logo-container">
+                <a href="medico_dashboard.html" class="hospital-logo">Hospital Connect</a>
+                </div>
+            
+            <nav class="nav-main-menu">
+                <a href="medico_dashboard.html" class="nav-main-link">Dashboard</a>
+                <a href="medico_agenda.html" class="nav-main-link">Minha Agenda</a>
+                <a href="medico_historico_paciente.html" class="nav-main-link">Pacientes</a>
+                <a href="estoque_medicamentos.html" class="nav-main-link">Estoque</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container content-card">
+            <h2 class="welcome-message">Bem-vindo(a) ao seu Painel, Dr(a). <span id="welcomeMedicoNome"></span>!</h2>
+            <p class="description-text">Aqui você pode gerenciar sua agenda, acessar dados de pacientes e muito mais.</p>
+
+            <div class="dashboard-summary-cards">
+                <div class="summary-card">
+                    <h3>Consultas Hoje</h3>
+                    <p class="card-value" id="consultasHoje">0</p>
+                    <a href="medico_agenda.html" class="card-link">Ver Detalhes</a>
+                </div>
+                <div class="summary-card">
+                    <h3>Próximas Consultas</h3>
+                    <p class="card-value" id="proximasConsultas">0</p>
+                    <a href="medico_agenda.html" class="card-link">Ver Agenda Completa</a>
+                </div>
+                <div class="summary-card">
+                    <h3>Meus Pacientes</h3>
+                    <p class="card-value" id="totalPacientes">0</p>
+                    <a href="medico_historico_paciente.html" class="card-link">Gerenciar Pacientes</a>
+                </div>
+            </div>
+
+            <div class="dashboard-quick-actions">
+                <h3>Ações Rápidas</h3>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="btnGerenciarAgenda">Gerenciar Agenda</button>
+                    <button class="btn-primary" id="btnBuscarPaciente">Buscar Paciente</button>
+                    <button class="btn-primary" id="btnAtenderConsulta">Iniciar Atendimento</button>
+                    <button class="btn-primary" id="btnVerEstoque">Ver Estoque de Medicamentos</button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hospital Connect. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="medico_dashboard.js"></script> </body>
+</html>
