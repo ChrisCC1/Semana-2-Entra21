@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Médico - MedCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="LogoMedCare.ico" type="image/x-icon">
+
+    <style>
+    /* Variáveis de Cores (Revisadas para mais opções e clareza) */
+    :root {
+        --primary-blue: #003366; /* Azul Marinho Principal */
+        --secondary-blue: #007bff; /* Azul para acentos e botões */
+        --light-blue: #e0f2f7; /* Azul bem claro para fundos/destaques */
+        --white: #ffffff;
+        --light-gray: #f0f2f5; /* Cinza muito claro para fundos (ligeiramente mais escuro que f8f9fa) */
+        --medium-gray: #ced4da; /* Para bordas e divisores */
+        --dark-gray: #343a40; /* Cinza escuro para textos principais */
+        --text-light: #6c757d; /* Cinza para textos secundários */
+        --success-green: #28a745;
+        --danger-red: #dc3545;
+        --warning-yellow: #ffc107;
+        --info-blue: #17a2b8; /* Azul para informações */
+        --font-family: 'Poppins', sans-serif;
+        --border-radius-sm: 6px;
+        --border-radius-md: 10px;
+        --border-radius-lg: 15px;
+        --box-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+        --box-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.08);
+        --transition-speed: 0.3s ease;
+    }
+
+    /* Reset Básico e Estilos Globais */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: var(--font-family);
+        line-height: 1.6;
+        color: var(--dark-gray);
+        background-color: var(--light-gray); /* Fundo geral mais suave */
+        display: flex; /* Para layout sidebar + content */
+        min-height: 100vh;
+        overflow-x: hidden; /* Previne scroll horizontal indesejado */
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--secondary-blue);
+        transition: color var(--transition-speed);
+    }
+
+    a:hover {
+        color: var(--primary-blue);
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--primary-blue);
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.6em; }
+
+    p {
+        margin-bottom: 1em;
+        color: var(--text-light); /* Texto de parágrafo mais suave */
+    }
+
+    /* Botões Gerais */
+    .btn {
+        display: inline-flex; /* Para alinhar ícone e texto */
+        align-items: center;
+        justify-content: center;
+        padding: 12px 25px; /* Padding ligeiramente maior */
+        border-radius: var(--border-radius-md); /* Cantos mais arredondados */
+        font-size: 0.98em; /* Fonte um pouco maior */
+        font-weight: 600; /* Mais negrito */
+        cursor: pointer;
+        transition: all var(--transition-speed); /* Transição para todas as propriedades */
+        text-align: center;
+        gap: 8px; /* Espaçamento entre ícone e texto */
+    }
+
+    .btn-primary {
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        transform: translateY(-2px); /* Efeito de levantar */
+        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-secondary {
+        background-color: var(--white);
+        color: var(--primary-blue);
+        border: 1px solid var(--primary-blue);
+        box-shadow: var(--box-shadow-sm);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow-md);
+    }
+
+    .btn-danger {
+        background-color: var(--danger-red);
+        color: var(--white);
+        border: none;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(220, 53, 69, 0.3);
+    }
+
+    .btn-success {
+        background-color: var(--success-green);
+        color: var(--white);
+        border: none;
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+    }
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-small {
+        padding: 8px 15px;
+        font-size: 0.85em;
+        border-radius: var(--border-radius-sm);
+    }
+
+    /* Layout do Dashboard */
+    .dashboard-wrapper {
+        display: flex;
+        width: 100%;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 280px; /* Largura um pouco maior */
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 30px 20px; /* Mais padding */
+        box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        border-right: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    }
+
+    .sidebar .logo {
+        font-size: 2em; /* Logo maior */
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 40px; /* Mais espaço abaixo do logo */
+        color: var(--white);
+        letter-spacing: 0.5px; /* Espaçamento entre letras */
+    }
+
+    .sidebar .logo a {
+        color: var(--white);
+    }
+
+    .sidebar nav ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 12px; /* Mais espaçamento entre itens */
+    }
+
+    .sidebar nav ul li a {
+        display: flex;
+        align-items: center;
+        padding: 14px 18px; /* Mais padding nos links */
+        color: #c0c0c0;
+        border-radius: var(--border-radius-md);
+        transition: all var(--transition-speed);
+        font-weight: 500;
+        font-size: 1.05em; /* Fonte um pouco maior */
+    }
+
+    .sidebar nav ul li a i {
+        margin-right: 15px; /* Mais espaço para o ícone */
+        font-size: 1.2em; /* Ícone maior */
+    }
+
+    .sidebar nav ul li a:hover {
+        background-color: rgba(0, 123, 255, 0.3); /* Fundo hover mais suave */
+        color: var(--white);
+    }
+    .sidebar nav ul li a.active {
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Sombra para o item ativo */
+    }
+
+    .sidebar .logout-btn {
+        margin-top: auto;
+        padding: 14px 18px;
+        background-color: var(--danger-red);
+        color: var(--white);
+        border-radius: var(--border-radius-md);
+        text-align: center;
+        font-weight: 600;
+        transition: all var(--transition-speed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 1.05em;
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+    }
+
+    .sidebar .logout-btn:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+    }
+
+    /* Main Content Area */
+    .main-content {
+        flex-grow: 1;
+        padding: 30px;
+        background-color: var(--light-gray);
+    }
+
+    .dashboard-header {
+        background-color: var(--white);
+        padding: 25px 30px; /* Mais padding */
+        border-radius: var(--border-radius-lg); /* Cantos mais arredondados */
+        box-shadow: var(--box-shadow-md); /* Sombra mais proeminente */
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 5px solid var(--secondary-blue); /* Detalhe na borda */
+    }
+
+    .dashboard-header h1 {
+        margin: 0;
+        font-size: 2.2em; /* Título maior */
+        color: var(--primary-blue);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-info .user-avatar {
+        width: 50px; /* Avatar maior */
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--light-blue);
+        color: var(--primary-blue);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6em; /* Fonte maior no avatar */
+        font-weight: 600;
+        margin-right: 15px;
+        border: 2px solid var(--secondary-blue); /* Borda no avatar */
+    }
+
+    .user-info .user-name {
+        font-weight: 600;
+        color: var(--dark-gray);
+        font-size: 1.1em; /* Nome maior */
+    }
+    
+    /* Seções de Conteúdo (escondidas/mostradas via JS) */
+    .content-section {
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow-md);
+        margin-bottom: 30px;
+        display: none;
+        animation: fadeIn 0.5s ease-out; /* Animação de fade-in */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-section.active {
+        display: block;
+    }
+
+    .content-section h2 {
+        font-size: 2em; /* Título da seção maior */
+        margin-bottom: 25px;
+        padding-bottom: 15px; /* Mais padding */
+        border-bottom: 2px solid var(--medium-gray); /* Borda mais visível */
+        color: var(--primary-blue);
+    }
+
+    /* Estilos para Tabela de Consultas e Estoque */
+    .consultations-table, .stock-table {
+        width: 100%;
+        border-collapse: separate; /* Permite border-radius nas células */
+        border-spacing: 0; /* Remove espaçamento padrão */
+        margin-top: 25px; /* Mais espaço */
+        font-size: 0.95em;
+        border-radius: var(--border-radius-md);
+        overflow: hidden; /* Garante que bordas arredondadas funcionem */
+    }
+
+    .consultations-table th, .stock-table th {
+        background-color: var(--primary-blue); /* Cabeçalho azul marinho */
+        color: var(--white);
+        padding: 15px 20px; /* Mais padding */
+        text-align: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .consultations-table td, .stock-table td {
+        padding: 14px 20px; /* Mais padding */
+        border-bottom: 1px solid var(--medium-gray); /* Borda mais clara */
+        vertical-align: middle;
+    }
+
+    .consultations-table tbody tr:last-child td,
+    .stock-table tbody tr:last-child td {
+        border-bottom: none; /* Remove borda da última linha */
+    }
+
+    .consultations-table tbody tr:nth-child(even) {
+        background-color: #f6f9fc; /* Listras para melhor leitura */
+    }
+    .consultations-table tbody tr:hover {
+        background-color: var(--light-blue); /* Hover mais evidente */
+        transition: background-color var(--transition-speed);
+    }
+    
+    .consultations-table .status-badge {
+        display: inline-block;
+        padding: 6px 12px; /* Padding maior */
+        border-radius: 25px; /* Mais arredondado */
+        font-size: 0.8em;
+        font-weight: 700; /* Mais negrito */
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .status-badge.pending {
+        background-color: var(--warning-yellow);
+        color: #6a4f00;
+    }
+    .status-badge.confirmed {
+        background-color: var(--success-green);
+        color: var(--white);
+    }
+    .status-badge.completed {
+        background-color: var(--primary-blue); /* Usando azul primário para completo */
+        color: var(--white);
+    }
+    .status-badge.canceled {
+        background-color: var(--danger-red);
+        color: var(--white);
+    }
+
+    .consultations-table .actions .btn {
+        margin-right: 8px; /* Mais espaço entre botões de ação */
+    }
+
+    /* Formulário de Registro de Consulta */
+    .appointment-record-form .form-group {
+        margin-bottom: 25px; /* Mais espaçamento */
+    }
+
+    .appointment-record-form label {
+        display: block;
+        margin-bottom: 10px; /* Mais espaçamento */
+        font-weight: 600; /* Mais negrito */
+        color: var(--primary-blue);
+        font-size: 1.05em;
+    }
+
+    .appointment-record-form input[type="text"],
+    .appointment-record-form input[type="date"],
+    .appointment-record-form input[type="time"],
+    .appointment-record-form select,
+    .appointment-record-form textarea {
+        width: 100%;
+        padding: 14px; /* Mais padding */
+        border: 1px solid var(--medium-gray); /* Borda mais suave */
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-family);
+        font-size: 1em;
+        transition: all var(--transition-speed);
+        background-color: var(--light-gray); /* Fundo levemente cinza */
+    }
+
+    .appointment-record-form input:focus,
+    .appointment-record-form select:focus,
+    .appointment-record-form textarea:focus {
+        outline: none;
+        border-color: var(--secondary-blue);
+        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2); /* Sombra de foco mais sutil */
+        background-color: var(--white); /* Fundo branco ao focar */
+    }
+
+    .appointment-record-form textarea {
+        resize: vertical;
+        min-height: 120px; /* Altura mínima maior */
+    }
+
+    .appointment-record-form .form-row {
+        display: flex;
+        gap: 25px; /* Mais espaçamento entre colunas */
+        margin-bottom: 25px;
+    }
+    .appointment-record-form .form-row > div {
+        flex: 1;
+    }
+
+    .form-actions {
+        margin-top: 40px; /* Mais espaço acima dos botões */
+        text-align: right;
+    }
+
+    .form-actions .btn {
+        margin-left: 15px; /* Mais espaço entre botões */
+    }
+
+    /* Tabela de Estoque de Medicamentos */
+    .stock-table .qty-available {
+        font-weight: 700; /* Mais negrito */
+        font-size: 1.05em;
+    }
+    .stock-table .qty-available.low-stock {
+        color: var(--danger-red);
+    }
+    .stock-table .qty-available.medium-stock {
+        color: var(--warning-yellow);
+    }
+    .stock-table .qty-available.high-stock {
+        color: var(--success-green);
+    }
+
+    /* Cards de Resumo no Overview */
+    .summary-cards > div {
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow-md);
+        border-left: 5px solid var(--secondary-blue); /* Detalhe na borda */
+        transition: transform var(--transition-speed);
+    }
+    .summary-cards > div:hover {
+        transform: translateY(-5px); /* Efeito de levantar no hover */
+    }
+    .summary-cards h3 {
+        font-size: 1.4em;
+        display: flex;
+        align-items: center;
+        color: var(--primary-blue);
+        margin-bottom: 15px;
+    }
+    .summary-cards h3 i {
+        font-size: 1.5em;
+        margin-right: 12px;
+    }
+    .summary-cards p {
+        font-size: 2.8em; /* Número maior */
+        font-weight: 700;
+        color: var(--secondary-blue);
+        margin-bottom: 0;
+    }
+    .summary-cards p.small-text { /* Para o alerta de reunião */
+        font-size: 1.1em;
+        color: var(--dark-gray);
+    }
+
+    /* Responsividade */
+    @media (max-width: 992px) {
+        .sidebar {
+            width: 80px;
+            padding: 15px 10px;
+        }
+        .sidebar .logo {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+        }
+        .sidebar nav ul li a {
+            justify-content: center;
+            padding: 10px;
+        }
+        .sidebar nav ul li a span {
+            display: none;
+        }
+        .sidebar nav ul li a i {
+            margin-right: 0;
+        }
+        .sidebar .logout-btn {
+            padding: 10px;
+            font-size: 0.85em;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .sidebar .logout-btn i {
+            margin-right: 0;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+        .dashboard-header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .dashboard-header h1 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .user-info {
+            margin-top: 15px;
+            width: 100%;
+            justify-content: flex-start;
+        }
+        .user-info .user-name {
+            margin-right: 0;
+        }
+        .content-section {
+            padding: 20px;
+        }
+        .content-section h2 {
+            font-size: 1.6em;
+        }
+        .consultations-table, .stock-table {
+            font-size: 0.9em;
+        }
+        .consultations-table th, .consultations-table td,
+        .stock-table th, .stock-table td {
+            padding: 10px 15px;
+        }
+        .appointment-record-form .form-row {
+            flex-direction: column;
+            gap: 0;
+        }
+        .appointment-record-form .form-row > div {
+            margin-bottom: 20px;
+        }
+        .appointment-record-form .form-row > div:last-child {
+            margin-bottom: 0;
+        }
+        .summary-cards {
+            grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar .logo {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .sidebar nav {
+            width: 100%;
+            order: 2;
+        }
+        .sidebar nav ul {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .sidebar nav ul li {
+            margin: 5px;
+        }
+        .sidebar nav ul li a {
+            padding: 8px 12px;
+            font-size: 0.9em;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar nav ul li a span {
+            display: block;
+            font-size: 0.7em;
+            margin-top: 5px;
+        }
+        .sidebar nav ul li a i {
+            margin-right: 0;
+            font-size: 1.2em;
+        }
+        .sidebar .logout-btn {
+            width: calc(100% - 30px);
+            margin: 15px auto 0 auto;
+            order: 3;
+            flex-direction: row;
+            gap: 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .main-content {
+            padding: 15px;
+        }
+        .dashboard-header h1 {
+            font-size: 1.5em;
+        }
+        .user-info .user-name {
+            font-size: 0.9em;
+        }
+        .user-info .user-avatar {
+            width: 35px;
+            height: 35px;
+            font-size: 1.2em;
+        }
+        .content-section h2 {
+            font-size: 1.4em;
+        }
+        .consultations-table, .stock-table {
+            font-size: 0.8em;
+        }
+        /* Esconde algumas colunas para mobile se necessário */
+        .consultations-table th:nth-child(3),
+        .consultations-table td:nth-child(3), /* Horário */
+        .consultations-table th:nth-child(4),
+        .consultations-table td:nth-child(4) { /* Telefone */
+            display: none;
+        }
+        .consultations-table th:nth-child(2),
+        .consultations-table td:nth-child(2) { /* Data */
+            min-width: 80px; /* Garante que a data não quebre muito */
+        }
+        .stock-table th:nth-child(2),
+        .stock-table td:nth-child(2) { /* Princípio Ativo */
+            display: none;
+        }
+    }
+
+/* Adicionar estes estilos */
+        .form-message {
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius-md);
+            font-size: 1em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0; /* Começa invisível */
+            transform: translateY(-10px); /* Começa um pouco acima */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Transição para fade-in e slide */
+        }
+
+        .form-message.show {
+            opacity: 1; /* Torna visível */
+            transform: translateY(0); /* Desliza para a posição normal */
+        }
+
+        .form-message.success {
+            background-color: #d4edda; /* Cor de fundo suave */
+            color: #155724; /* Cor do texto */
+            border: 1px solid #c3e6cb; /* Borda sutil */
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .form-message i {
+            font-size: 1.2em;
+        }
+        /* Fim dos estilos adicionados */
+
+/* Estilos do Modal */
+        .modal {
+            display: none; /* Escondido por padrão */
+            position: fixed; /* Fixo na tela */
+            z-index: 1000; /* Acima de tudo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Permite scroll se o conteúdo for grande */
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            animation: fadeInModal 0.3s ease-out; /* Animação de entrada */
+        }
+
+        .modal.active {
+            display: flex; /* Exibe o modal como flex para centralizar */
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: auto;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-md); /* Sombra para o modal */
+            width: 90%;
+            max-width: 700px; /* Largura máxima */
+            position: relative;
+            animation: slideInModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animação de slide */
+            max-height: 90vh; /* Altura máxima para caber na tela */
+            overflow-y: auto; /* Permite scroll no conteúdo do modal */
+        }
+
+        .close-button {
+            color: var(--dark-gray);
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--danger-red);
+        }
+
+        .modal-content h2 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--medium-gray);
+            font-size: 1.8em;
+        }
+
+        .modal-body p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            color: var(--dark-gray);
+        }
+        .modal-body p strong {
+            color: var(--primary-blue);
+            margin-right: 5px;
+        }
+        .modal-body hr {
+            border: 0;
+            border-top: 1px dashed var(--medium-gray);
+            margin: 20px 0;
+        }
+
+        .modal-body .status-badge {
+            font-size: 0.9em; /* Ajusta tamanho do badge no modal */
+            padding: 4px 8px;
+        }
+
+        .modal-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
+            text-align: right;
+        }
+
+        .modal-footer .btn {
+            margin-left: 10px;
+        }
+
+        /* Animações do Modal */
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInModal {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsividade do Modal */
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .modal-content h2 {
+                font-size: 1.5em;
+            }
+            .close-button {
+                font-size: 25px;
+                top: 10px;
+                right: 15px;
+            }
+            .modal-body p {
+                font-size: 0.95em;
+            }
+            .modal-footer {
+                text-align: center;
+            }
+            .modal-footer .btn {
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .modal-footer .btn:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+</style>
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="index.html">MedCare</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-target="overview"><i class="fas fa-tachometer-alt"></i> <span>Visão Geral</span></a></li>
+                    <li><a href="#" class="nav-link" data-target="my-consultations"><i class="fas fa-calendar-alt"></i> <span>Minhas Consultas</span></a></li>
+                    <li><a href="#" class="nav-link" data-target="record-appointment"><i class="fas fa-file-medical"></i> <span>Registrar Consulta</span></a></li>
+                    <li><a href="#" class="nav-link" data-target="medicine-stock"><i class="fas fa-capsules"></i> <span>Estoque de Medicamentos</span></a></li>
+                    </ul>
+            </nav>
+            <a href="doctor-login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h1>Painel do Médico</h1>
+                <div class="user-info">
+                    <div class="user-avatar">DR</div>
+                    <span class="user-name">Dr. João Silva</span>
+                </div>
+            </div>
+
+            <section id="overview" class="content-section active">
+                <h2>Bem-vindo(a) ao seu Painel, Dr. João Silva!</h2>
+                <p>Aqui você pode ter uma visão rápida de suas próximas atividades e dados importantes.</p>
+                <div class="summary-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div style="background-color: var(--light-blue); padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3><i class="fas fa-calendar-check" style="color: var(--primary-blue); margin-right: 10px;"></i>Consultas Hoje</h3>
+                        <p style="font-size: 2.5em; font-weight: 700; color: var(--secondary-blue);">5</p>
+                    </div>
+                    <div style="background-color: var(--light-blue); padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3><i class="fas fa-user-injured" style="color: var(--primary-blue); margin-right: 10px;"></i>Novos Pacientes</h3>
+                        <p style="font-size: 2.5em; font-weight: 700; color: var(--secondary-blue);">2</p>
+                    </div>
+                    <div style="background-color: var(--light-blue); padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3><i class="fas fa-bell" style="color: var(--primary-blue); margin-right: 10px;"></i>Próximo Alerta</h3>
+                        <p style="font-size: 1.1em; color: var(--dark-gray);">Reunião da equipe - 28/07, 14h</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="my-consultations" class="content-section">
+                <h2>Minhas Consultas</h2>
+                <p>Confira a lista das suas próximas consultas agendadas e seu status.</p>
+                <table class="consultations-table">
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Telefone</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    <tr>
+        <td>Maria Oliveira</td>
+        <td>2025-07-30</td>
+        <td>09:00</td>
+        <td>(47) 98765-4321</td>
+        <td><span class="status-badge confirmed">Confirmada</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>João Pereira</td>
+        <td>2025-07-30</td>
+        <td>10:30</td>
+        <td>(47) 99876-1234</td>
+        <td><span class="status-badge pending">Pendente</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Beatriz Santos</td>
+        <td>2025-07-30</td>
+        <td>14:00</td>
+        <td>(47) 91111-2222</td>
+        <td><span class="status-badge completed">Concluída</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Pedro Rocha</td>
+        <td>2025-07-30</td>
+        <td>16:00</td>
+        <td>(47) 93333-4444</td>
+        <td><span class="status-badge canceled">Cancelada</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Ana Souza</td>
+        <td>2025-07-31</td>
+        <td>09:30</td>
+        <td>(47) 91234-5678</td>
+        <td><span class="status-badge confirmed">Confirmada</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Lucas Martins</td>
+        <td>2025-07-31</td>
+        <td>11:00</td>
+        <td>(47) 95678-9012</td>
+        <td><span class="status-badge pending">Pendente</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Carla Fernandes</td>
+        <td>2025-08-01</td>
+        <td>10:00</td>
+        <td>(47) 97890-1234</td>
+        <td><span class="status-badge confirmed">Confirmada</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Rafael Gomes</td>
+        <td>2025-08-01</td>
+        <td>14:30</td>
+        <td>(47) 90123-4567</td>
+        <td><span class="status-badge pending">Pendente</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Juliana Costa</td>
+        <td>2025-08-05</td>
+        <td>08:00</td>
+        <td>(47) 92345-6789</td>
+        <td><span class="status-badge confirmed">Confirmada</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Fernando Dantas</td>
+        <td>2025-08-07</td>
+        <td>15:00</td>
+        <td>(47) 94567-8901</td>
+        <td><span class="status-badge pending">Pendente</span></td>
+        <td class="actions">
+            <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+            <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Editar</button>
+        </td>
+    </tr>
+</tbody>
+                </table>
+            </section>
+
+            <section id="record-appointment" class="content-section">
+                <h2>Registrar Nova Consulta</h2>
+                <p>Preencha os detalhes para registrar uma nova consulta para um paciente.</p>
+
+                <div id="formMessage" class="form-message" style="display: none;"></div>
+
+                <form class="appointment-record-form">
+                    <div class="form-row">
+                        <div>
+                            <label for="patientName">Nome do Paciente:</label>
+                            <input type="text" id="patientName" name="patientName" required placeholder="Nome completo do paciente">
+                        </div>
+                        <div>
+                            <label for="patientCPF">CPF do Paciente (Opcional):</label>
+                            <input type="text" id="patientCPF" name="patientCPF" placeholder="___.___.___-__">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="consultationDate">Data da Consulta:</label>
+                            <input type="date" id="consultationDate" name="consultationDate" required>
+                        </div>
+                        <div>
+                            <label for="consultationTime">Horário da Consulta:</label>
+                            <input type="time" id="consultationTime" name="consultationTime" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mainComplaint">Queixa Principal:</label>
+                        <textarea id="mainComplaint" name="mainComplaint" rows="3" placeholder="Ex: Dor de cabeça, febre, etc." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diagnosis">Diagnóstico:</label>
+                        <textarea id="diagnosis" name="diagnosis" rows="4" placeholder="Diagnóstico médico"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medications">Medicamentos Prescritos:</label>
+                        <textarea id="medications" name="medications" rows="4" placeholder="Lista de medicamentos e posologia"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observations">Observações Adicionais:</label>
+                        <textarea id="observations" name="observations" rows="5" placeholder="Observações, exames solicitados, encaminhamentos"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary"><i class="fas fa-eraser"></i> Limpar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar Registro</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="medicine-stock" class="content-section">
+                <h2>Estoque de Medicamentos</h2>
+                <p>Verifique a disponibilidade dos medicamentos em estoque.</p>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>Medicamento</th>
+                            <th>Princípio Ativo</th>
+                            <th>Quantidade Disponível</th>
+                            <th>Última Atualização</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    <tr>
+        <td>Paracetamol 500mg</td>
+        <td>Paracetamol</td>
+        <td><span class="qty-available high-stock">1250 unid.</span></td>
+        <td>2025-07-25</td>
+    </tr>
+    <tr>
+        <td>Amoxicilina 500mg</td>
+        <td>Amoxicilina</td>
+        <td><span class="qty-available medium-stock">450 unid.</span></td>
+        <td>2025-07-26</td>
+    </tr>
+    <tr>
+        <td>Ibuprofeno 400mg</td>
+        <td>Ibuprofeno</td>
+        <td><span class="qty-available low-stock">85 unid.</span></td>
+        <td>2025-07-28</td>
+    </tr>
+    <tr>
+        <td>Dipirona Sódica 1g</td>
+        <td>Dipirona</td>
+        <td><span class="qty-available high-stock">800 unid.</span></td>
+        <td>2025-07-24</td>
+    </tr>
+    <tr>
+        <td>Omeprazol 20mg</td>
+        <td>Omeprazol</td>
+        <td><span class="qty-available low-stock">90 unid.</span></td>
+        <td>2025-07-27</td>
+    </tr>
+    <tr>
+        <td>AAS 100mg</td>
+        <td>Ácido Acetilsalicílico</td>
+        <td><span class="qty-available high-stock">1500 unid.</span></td>
+        <td>2025-07-23</td>
+    </tr>
+    <tr>
+        <td>Losartana Potássica 50mg</td>
+        <td>Losartana</td>
+        <td><span class="qty-available medium-stock">300 unid.</span></td>
+        <td>2025-07-27</td>
+    </tr>
+    <tr>
+        <td>Atenolol 25mg</td>
+        <td>Atenolol</td>
+        <td><span class="qty-available high-stock">620 unid.</span></td>
+        <td>2025-07-26</td>
+    </tr>
+    <tr>
+        <td>Cloridrato de Fluoxetina 20mg</td>
+        <td>Fluoxetina</td>
+        <td><span class="qty-available low-stock">55 unid.</span></td>
+        <td>2025-07-29</td>
+    </tr>
+    <tr>
+        <td>Sinvastatina 40mg</td>
+        <td>Sinvastatina</td>
+        <td><span class="qty-available medium-stock">210 unid.</span></td>
+        <td>2025-07-28</td>
+    </tr>
+    <tr>
+        <td>Pantoprazol 40mg</td>
+        <td>Pantoprazol</td>
+        <td><span class="qty-available high-stock">710 unid.</span></td>
+        <td>2025-07-25</td>
+    </tr>
+</tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+<div id="viewAppointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Detalhes da Consulta</h2>
+            <div class="modal-body">
+                <p><strong>Paciente:</strong> <span id="modalPatientName"></span></p>
+                <p><strong>Data:</strong> <span id="modalConsultationDate"></span></p>
+                <p><strong>Horário:</strong> <span id="modalConsultationTime"></span></p>
+                <p><strong>Telefone:</strong> <span id="modalPatientPhone"></span></p>
+                <p><strong>Status:</strong> <span id="modalConsultationStatus" class="status-badge"></span></p>
+                <hr>
+                <p><strong>Queixa Principal:</strong> <span id="modalMainComplaint"></span></p>
+                <p><strong>Diagnóstico:</strong> <span id="modalDiagnosis"></span></p>
+                <p><strong>Medicamentos Prescritos:</strong> <span id="modalMedications"></span></p>
+                <p><strong>Observações:</strong> <span id="modalObservations"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeModalButton"><i class="fas fa-times"></i> Fechar</button>
+                <button class="btn btn-primary" id="editModalButton"><i class="fas fa-edit"></i> Editar Consulta</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="doctor-dashboard.js"></script>
+
+</body>
+</html>

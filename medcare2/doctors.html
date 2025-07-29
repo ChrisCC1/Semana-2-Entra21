@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corpo Clínico - MedCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="LogoMedCare.ico" type="image/x-icon">
+
+    <style>
+        /* Variáveis de Cores */
+        :root {
+            --primary-blue: #003366; /* Azul Marinho Principal */
+            --secondary-blue: #007bff; /* Azul para acentos e botões */
+            --light-blue: #e0f2f7; /* Azul bem claro para fundos/destaques */
+            --white: #ffffff;
+            --light-gray: #f8f9fa; /* Cinza muito claro para fundos */
+            --gray: #6c757d; /* Cinza para textos secundários */
+            --dark-gray: #343a40; /* Cinza escuro para textos principais */
+            --border-color: #dee2e6;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Reset Básico e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-blue);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-blue);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--dark-gray);
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            color: var(--gray);
+            font-size: 1.1em;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Botões */
+        .btn-primary, .btn-primary-small, .btn-secondary, .btn-contact-emergency {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary-small {
+            padding: 8px 18px;
+            font-size: 0.95em;
+            border-radius: 6px;
+        }
+
+        .btn-primary-small:hover {
+            background-color: #0069d9;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            box-shadow: none;
+            padding: 12px 25px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 51, 102, 0.1);
+        }
+
+        .btn-contact-emergency {
+            background-color: var(--danger-red);
+            font-size: 1.2em;
+            padding: 15px 30px;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+        }
+
+        .btn-contact-emergency:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-menu {
+            display: flex; /* Garante que em desktop o menu esteja visível */
+            align-items: center;
+        }
+
+        .nav-menu a {
+            margin-left: 25px;
+            font-weight: 500;
+            color: var(--dark-gray);
+            position: relative;
+            padding-bottom: 5px; /* Espaço para o sublinhado */
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--secondary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-blue);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none; /* Escondido em desktop */
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section (Específico para "Corpo Clínico") */
+        .hero-section {
+            background: linear-gradient(#023E8A, #03045e), url('https://source.unsplash.com/1600x900/?hospital,doctors') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 80px 0;
+            background-color: var(--white);
+            margin-bottom: 20px; /* Espaço entre as seções */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        section:nth-child(even) { /* Para alternar cor de fundo seções */
+            background-color: var(--light-gray);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+            border-radius: 2px;
+        }
+
+        /* Seção de Médicos (Grid) */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .doctor-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .doctor-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Imagens circulares */
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--secondary-blue);
+            box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); /* Borda brilhante */
+        }
+
+        .doctor-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+
+        .doctor-card p.specialty {
+            font-size: 1.1em;
+            color: var(--secondary-blue);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .doctor-card p.description {
+            font-size: 0.95em;
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .doctor-card .btn-primary-small {
+            background-color: var(--primary-blue);
+            box-shadow: none;
+        }
+
+        .doctor-card .btn-primary-small:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        /* Seção CTA para Agendamento (mesmo estilo das outras páginas) */
+        .cta-appointment {
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), url('https://source.unsplash.com/1600x900/?appointment,calendar-medical') no-repeat center center/cover;
+            color: var(--white);
+            padding: 80px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .cta-appointment h2 {
+            color: var(--white);
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta-appointment h2::after {
+            background-color: var(--secondary-blue);
+        }
+
+        .cta-appointment p {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        /* Footer (mesmo estilo das outras páginas) */
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 20px 0;
+            font-size: 0.95em;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.4em;
+        }
+
+        .footer-col p {
+            color: #c0c0c0;
+            line-height: 1.8;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #c0c0c0;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .footer-col .social-icons a {
+            color: var(--white);
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col .social-icons a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .footer-col p i {
+            margin-right: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: #c0c0c0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+            }
+            .nav-menu {
+                display: none; /* Esconde o menu em telas menores */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--white);
+                position: absolute;
+                top: 80px; /* Abaixo do header */
+                left: 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+                z-index: 90;
+            }
+
+            .nav-menu.active {
+                display: flex; /* Mostra quando ativo */
+            }
+
+            .nav-menu a {
+                margin: 10px 20px;
+                text-align: center;
+                width: auto;
+            }
+
+            .btn-primary-small {
+                margin-top: 10px;
+                width: calc(100% - 40px); /* Ajusta a largura do botão dentro do menu */
+            }
+
+            .menu-toggle {
+                display: block; /* Mostra o botão de toggle */
+            }
+
+            .header-content {
+                padding-right: 20px; /* Garante padding no lado direito */
+            }
+
+            /* Ajustes para seções */
+            section {
+                padding: 60px 20px;
+            }
+            section h2 {
+                font-size: 2em;
+            }
+            .doctors-grid, .footer-columns {
+                grid-template-columns: 1fr; /* Coluna única em telas muito pequenas */
+            }
+            .doctor-card {
+                margin-bottom: 20px; /* Espaçamento entre cards empilhados */
+            }
+            .btn-primary, .btn-secondary, .btn-contact-emergency {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+                padding: 15px 20px; /* Aumenta o padding para melhor toque */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+            .hero-content p {
+                font-size: 1em;
+            }
+            .doctor-card h3 {
+                font-size: 1.4em;
+            }
+            .doctor-card p.specialty {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            .hero-content {
+                padding: 0 10px;
+            }
+            .section-description {
+                font-size: 1em;
+            }
+            .doctor-card img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header style="padding: 20px; text-align: right;">
+            <a href="register.html" class="btn btn-primary" style="margin-right: 10px;">
+                <i class="fas fa-user-plus"></i> Registrar-se
+            </a>
+            <a href="doctor-login.html" class="btn btn-secondary">
+                <i class="fas fa-user-md"></i> Área do Médico
+            </a>
+        </header>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">MedCare</a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Início</a>
+                <a href="about.html">Sobre Nós</a>
+                <a href="services.html">Serviços</a>
+                <a href="doctors.html" class="active">Corpo Clínico</a>
+                <a href="contact.html">Contato</a>
+                <a href="login.html" class="btn-primary-small">Login</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content">
+                <h1>Nosso Corpo Clínico</h1>
+                <p>Conheça os especialistas dedicados que fazem da MedCare um centro de excelência em saúde.</p>
+            </div>
+        </section>
+
+        <section class="doctors-list">
+            <div class="container">
+                <h2>Conheça Nossos Especialistas</h2>
+                <p class="section-description">Nossa equipe é composta por profissionais altamente qualificados e com vasta experiência, prontos para oferecer o melhor cuidado.</p>
+                
+                <div class="doctors-grid">
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?doctor-portrait,male-doctor" alt="Dr. Pedro Almeida">
+                        <h3>Dr. Pedro Almeida</h3>
+                        <p class="specialty">Cardiologista</p>
+                        <p class="description">Especialista em cardiologia intervencionista, com foco em saúde do coração e prevenção de doenças cardiovasculares.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?female-doctor-portrait,woman-doctor" alt="Dra. Ana Costa">
+                        <h3>Dra. Ana Costa</h3>
+                        <p class="specialty">Pediatra</p>
+                        <p class="description">Com carinho e dedicação, cuida da saúde e do desenvolvimento de crianças e adolescentes há mais de 10 anos.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?asian-doctor,male-doctor" alt="Dr. Ricardo Santos">
+                        <h3>Dr. Ricardo Santos</h3>
+                        <p class="specialty">Neurologista</p>
+                        <p class="description">Focado no diagnóstico e tratamento de distúrbios neurológicos, utilizando as mais recentes abordagens clínicas.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?doctor-smile,female-doctor" alt="Dra. Sofia Martins">
+                        <h3>Dra. Sofia Martins</h3>
+                        <p class="specialty">Dermatologista</p>
+                        <p class="description">Expert em saúde da pele, tratamentos dermatológicos e procedimentos estéticos com segurança e naturalidade.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?elderly-doctor,male-doctor" alt="Dr. Carlos Mendes">
+                        <h3>Dr. Carlos Mendes</h3>
+                        <p class="specialty">Ortopedista</p>
+                        <p class="description">Líder em cirurgias ortopédicas e reabilitação, ajudando pacientes a recuperar a mobilidade e qualidade de vida.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                    <div class="doctor-card">
+                        <img src="https://source.unsplash.com/300x300/?young-doctor,female-doctor" alt="Dra. Camila Ribeiro">
+                        <h3>Dra. Camila Ribeiro</h3>
+                        <p class="specialty">Ginecologista</p>
+                        <p class="description">Oferece atenção integral à saúde da mulher, desde a adolescência até a menopausa, com empatia e profissionalismo.</p>
+                        <a href="appointment.html" class="btn-primary-small">Agendar Consulta</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-appointment">
+            <div class="container">
+                <h2>Pronto para Agendar Sua Consulta?</h2>
+                <p>Encontre o especialista ideal para você. Agende sua consulta de forma rápida e segura.</p>
+                <a href="appointment.html" class="btn-primary">Agende Sua Consulta Agora <i class="fas fa-calendar-alt"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>MedCare</h3>
+                    <p>Sua saúde é nossa prioridade. Cuidamos de você com excelência, tecnologia e humanidade.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="about.html">Sobre Nós</a></li>
+                        <li><a href="services.html">Serviços</a></li>
+                        <li><a href="doctors.html">Corpo Clínico</a></li>
+                        <li><a href="appointment.html">Agendar Consulta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua da Saúde, 123 - Centro, Blumenau - SC</p>
+                    <p><i class="fas fa-phone-alt"></i> (XX) XXXX-YYYY</p>
+                    <p><i class="fas fa-envelope"></i> contato@medcare.com.br</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MedCare. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="doctors.js"></script>
+</body>
+</html>

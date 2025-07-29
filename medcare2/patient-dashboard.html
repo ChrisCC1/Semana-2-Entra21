@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Painel do Paciente</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+        // Verifica se o paciente está logado no sessionStorage
+        if (sessionStorage.getItem('medcarePatientLoggedIn') !== 'true') {
+            window.location.href = 'login.html'; // Se não estiver logado, redireciona para a página de login do paciente
+        }
+    </script>
+    <style>
+        /* Variáveis de Cores (Consistentes com o projeto) */
+        :root {
+            --primary-blue: #003366; /* Azul Marinho Principal */
+            --secondary-blue: #007bff; /* Azul para acentos e botões */
+            --light-blue: #e0f2f7; /* Azul bem claro para fundos/destaques */
+            --white: #ffffff;
+            --light-gray: #f0f2f5; /* Fundo mais suave */
+            --medium-gray: #ced4da; /* Para bordas e divisores */
+            --dark-gray: #343a40; /* Cinza escuro para textos principais */
+            --text-light: #6c757d; /* Cinza para textos secundários */
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --warning-orange: #ffc107;
+            --font-family: 'Poppins', sans-serif;
+            --border-radius-sm: 6px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 15px;
+            --box-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+            --box-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease;
+        }
+
+        /* Reset Básico e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden; /* Evita scroll horizontal */
+        }
+
+        /* Layout do Dashboard */
+        .dashboard-container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Sidebar (Barra Lateral) */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--box-shadow-md);
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-header .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-blue);
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.6em;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-size: 1.05em;
+        }
+
+        .sidebar-nav a i {
+            margin-right: 12px;
+            font-size: 1.2em;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            box-shadow: var(--box-shadow-sm);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1; /* Ocupa o espaço restante */
+            padding: 30px 40px;
+            background-color: var(--light-gray);
+            overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info .user-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .user-info .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        /* Seções de Conteúdo */
+        .content-section {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .content-section h2 {
+            font-size: 1.8em;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--medium-gray);
+        }
+
+        /* Botões Gerais */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-md);
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--secondary-blue);
+            border: 1px solid var(--secondary-blue);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85em;
+            border-radius: var(--border-radius-sm);
+        }
+
+        /* Badges de Status (mesmos do dashboard do médico) */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .status-badge.confirmed { background-color: #d4edda; color: #155724; } /* Verde suave */
+        .status-badge.pending { background-color: #fff3cd; color: #856404; } /* Amarelo suave */
+        .status-badge.completed { background-color: #cce5ff; color: #004085; } /* Azul suave */
+        .status-badge.canceled { background-color: #f8d7da; color: #721c24; } /* Vermelho suave */
+
+        /* Tabelas */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--medium-gray);
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        .data-table .actions button {
+            margin-right: 5px;
+        }
+
+        /* Formulários (gerais, podem ser adaptados) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="date"],
+        .form-group input[type="time"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-family);
+            font-size: 1em;
+            transition: all var(--transition-speed);
+            background-color: var(--light-gray);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+            background-color: var(--white);
+        }
+        
+        /* Mensagem de formulário (feedback) */
+        .form-message {
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius-md);
+            font-size: 1em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0; /* Começa invisível */
+            transform: translateY(-10px); /* Começa um pouco acima */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Transição para fade-in e slide */
+        }
+
+        .form-message.show {
+            opacity: 1; /* Torna visível */
+            transform: translateY(0); /* Desliza para a posição normal */
+        }
+
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .form-message i {
+            font-size: 1.2em;
+        }
+
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 200px; /* Sidebar um pouco menor */
+                padding: 20px 15px;
+            }
+            .sidebar-header .profile-pic {
+                width: 80px;
+                height: 80px;
+            }
+            .sidebar-header h3 {
+                font-size: 1.4em;
+            }
+            .sidebar-nav a {
+                font-size: 1em;
+                padding: 10px 12px;
+            }
+            .sidebar-nav a i {
+                margin-right: 10px;
+            }
+            .main-content {
+                padding: 20px 25px;
+            }
+            .content-header h1 {
+                font-size: 2em;
+            }
+            .user-info .user-name {
+                font-size: 1em;
+            }
+            .user-info .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+            .content-section h2 {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column; /* Sidebar acima do conteúdo */
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                flex-direction: row; /* Itens em linha */
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: var(--box-shadow-md);
+            }
+            .sidebar-header {
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+            .sidebar-header .profile-pic {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+                margin-right: 15px;
+            }
+            .sidebar-header h3 {
+                font-size: 1.5em;
+                margin-bottom: 0;
+            }
+            .sidebar-header p {
+                display: none; /* Esconde o título/especialidade em mobile */
+            }
+
+            .sidebar-nav {
+                display: none; /* Esconde a nav padrão em mobile */
+            }
+            /* Será substituído por um menu hambúrguer ou nav responsiva com JS */
+
+            .main-content {
+                padding: 20px;
+            }
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .content-header h1 {
+                font-size: 2em;
+                width: 100%;
+            }
+            .user-info {
+                width: 100%;
+                justify-content: flex-end; /* Mover informações do usuário para a direita */
+            }
+
+            .data-table th, .data-table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-section {
+                padding: 20px;
+            }
+            .content-section h2 {
+                font-size: 1.5em;
+            }
+            .btn {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+            .data-table {
+                font-size: 0.85em;
+            }
+            /* Forçar responsividade da tabela (pode não ser ideal para todas) */
+            .data-table thead {
+                display: none; /* Esconde cabeçalho em telas pequenas */
+            }
+            .data-table, .data-table tbody, .data-table tr, .data-table td {
+                display: block;
+                width: 100%;
+            }
+            .data-table tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--medium-gray);
+                border-radius: var(--border-radius-md);
+                background-color: var(--white);
+                box-shadow: var(--box-shadow-sm);
+                padding: 10px 0;
+            }
+            .data-table td {
+                text-align: right;
+                padding-left: 50%; /* Espaço para o label virtual */
+                position: relative;
+                border-bottom: none; /* Remove borda entre TDs do mesmo TR */
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            .data-table td::before {
+                content: attr(data-label); /* Usa o atributo data-label */
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: 600;
+                color: var(--primary-blue);
+                text-align: left;
+            }
+            .data-table td:last-child {
+                border-bottom: none; /* Remove a última borda */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://via.placeholder.com/100/007bff/FFFFFF?text=P" alt="Avatar do Paciente" class="profile-pic">
+                <h3>Olá, [Nome do Paciente]</h3> <p>Paciente MedCare</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" data-section="overview" class="active"><i class="fas fa-home"></i> Visão Geral</a></li>
+                    <li><a href="#" data-section="my-appointments"><i class="fas fa-calendar-alt"></i> Minhas Consultas</a></li>
+                    <li><a href="#" data-section="schedule-appointment"><i class="fas fa-stethoscope"></i> Agendar Nova Consulta</a></li>
+                    <li><a href="#" data-section="my-profile"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                    <li><a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <h1 id="currentSectionTitle">Visão Geral</h1>
+                <div class="user-info">
+                    <span class="user-name">Paciente MedCare</span>
+                    <img src="https://via.placeholder.com/45/007bff/FFFFFF?text=P" alt="Avatar" class="user-avatar">
+                </div>
+            </div>
+
+            <section id="overview" class="content-section active">
+                <h2>Seja Bem-vindo(a) ao seu Painel MedCare!</h2>
+                <p>Aqui você pode gerenciar suas consultas, agendar novos atendimentos e atualizar seus dados.</p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                    <div style="background-color: var(--light-blue); padding: 25px; border-radius: var(--border-radius-md); flex: 1; min-width: 280px; box-shadow: var(--box-shadow-sm);">
+                        <h3>Próxima Consulta</h3>
+                        <p style="font-size: 1.1em; color: var(--primary-blue); font-weight: 600;">Nenhuma consulta agendada.</p>
+                        <button class="btn btn-primary btn-small" onclick="showSection('schedule-appointment'); activateNavLink('schedule-appointment');">Agendar Agora <i class="fas fa-plus-circle"></i></button>
+                    </div>
+                    <div style="background-color: var(--white); padding: 25px; border-radius: var(--border-radius-md); flex: 1; min-width: 280px; box-shadow: var(--box-shadow-sm);">
+                        <h3>Consultas Concluídas</h3>
+                        <p style="font-size: 1.1em; color: var(--primary-blue); font-weight: 600;">5</p>
+                        <button class="btn btn-secondary btn-small" onclick="showSection('my-appointments'); activateNavLink('my-appointments');">Ver Histórico <i class="fas fa-history"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="my-appointments" class="content-section" style="display: none;">
+                <h2>Minhas Consultas</h2>
+                <p>Aqui você encontra todas as suas consultas agendadas e realizadas.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Médico</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Especialidade</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Médico">Dr. João Silva</td>
+                            <td data-label="Data">2025-08-10</td>
+                            <td data-label="Horário">14:00</td>
+                            <td data-label="Especialidade">Clínico Geral</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Confirmada</span></td>
+                            <td data-label="Ações" class="actions">
+                                <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="btn btn-secondary btn-small"><i class="fas fa-edit"></i> Remarcar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Médico">Dra. Ana Costa</td>
+                            <td data-label="Data">2025-07-28</td>
+                            <td data-label="Horário">10:30</td>
+                            <td data-label="Especialidade">Cardiologista</td>
+                            <td data-label="Status"><span class="status-badge completed">Concluída</span></td>
+                            <td data-label="Ações" class="actions">
+                                <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Médico">Dr. Pedro Rocha</td>
+                            <td data-label="Data">2025-08-15</td>
+                            <td data-label="Horário">09:00</td>
+                            <td data-label="Especialidade">Pediatra</td>
+                            <td data-label="Status"><span class="status-badge pending">Pendente</span></td>
+                            <td data-label="Ações" class="actions">
+                                <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="btn btn-secondary btn-small"><i class="fas fa-times"></i> Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Médico">Dra. Marta Lima</td>
+                            <td data-label="Data">2025-07-20</td>
+                            <td data-label="Horário">16:00</td>
+                            <td data-label="Especialidade">Dermatologista</td>
+                            <td data-label="Status"><span class="status-badge canceled">Cancelada</span></td>
+                            <td data-label="Ações" class="actions">
+                                <button class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Ver</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="schedule-appointment" class="content-section" style="display: none;">
+                <h2>Agendar Nova Consulta</h2>
+                <p>Preencha os dados abaixo para solicitar um novo agendamento.</p>
+                
+                <div id="scheduleMessage" class="form-message" style="display: none;"></div>
+
+                <form class="schedule-form" id="scheduleAppointmentForm">
+                    <div class="form-group">
+                        <label for="doctorName">Médico/Especialidade</label>
+                        <select id="doctorName" required>
+                            <option value="">Selecione o médico ou especialidade</option>
+                            <option value="Dr. João Silva (Clínico Geral)">Dr. João Silva (Clínico Geral)</option>
+                            <option value="Dra. Ana Costa (Cardiologista)">Dra. Ana Costa (Cardiologista)</option>
+                            <option value="Dr. Pedro Rocha (Pediatra)">Dr. Pedro Rocha (Pediatra)</option>
+                            <option value="Dra. Marta Lima (Dermatologista)">Dra. Marta Lima (Dermatologista)</option>
+                            <option value="Dr. Carlos Mendes (Ortopedista)">Dr. Carlos Mendes (Ortopedista)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Data Preferencial</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Horário Preferencial</label>
+                        <input type="time" id="appointmentTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Motivo da Consulta</label>
+                        <textarea id="reason" rows="4" placeholder="Descreva brevemente o motivo da consulta" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-calendar-plus"></i> Solicitar Agendamento
+                    </button>
+                </form>
+            </section>
+
+            <section id="my-profile" class="content-section" style="display: none;">
+                <h2>Meu Perfil</h2>
+                <p>Visualize e edite suas informações pessoais.</p>
+                <form class="profile-form" id="profileForm">
+                    <div class="form-group">
+                        <label for="profileName">Nome Completo</label>
+                        <input type="text" id="profileName" value="Fulano de Tal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">E-mail</label>
+                        <input type="email" id="profileEmail" value="paciente@medcare.com" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhone">Telefone</label>
+                        <input type="text" id="profilePhone" value="(47) 99999-8888">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileAddress">Endereço</label>
+                        <input type="text" id="profileAddress" value="Rua Exemplo, 123 - Centro">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="editProfileBtn"><i class="fas fa-edit"></i> Editar Dados</button>
+                    <button type="submit" class="btn btn-success" id="saveProfileBtn" style="display: none;"><i class="fas fa-save"></i> Salvar Alterações</button>
+                    <button type="button" class="btn btn-secondary" id="cancelProfileBtn" style="display: none;"><i class="fas fa-times"></i> Cancelar</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            const contentSections = document.querySelectorAll('.content-section');
+            const currentSectionTitle = document.getElementById('currentSectionTitle');
+            const logoutButton = document.getElementById('logoutButton');
+            const scheduleAppointmentForm = document.getElementById('scheduleAppointmentForm');
+            const scheduleMessage = document.getElementById('scheduleMessage');
+            const profileForm = document.getElementById('profileForm');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const saveProfileBtn = document.getElementById('saveProfileBtn');
+            const cancelProfileBtn = document.getElementById('cancelProfileBtn');
+            // Seleciona campos de input e textarea que devem ser editáveis (excluindo nome e email)
+            const profileInputs = profileForm.querySelectorAll('input:not(#profileName):not(#profileEmail), textarea');
+
+            // --- Funções Auxiliares ---
+
+            // Função para exibir uma seção e atualizar o título no cabeçalho
+            const showSection = (sectionId) => {
+                contentSections.forEach(section => {
+                    section.style.display = 'none'; // Esconde todas as seções
+                    section.classList.remove('active'); // Remove a classe 'active'
+                });
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.style.display = 'block'; // Mostra a seção desejada
+                    activeSection.classList.add('active'); // Adiciona a classe 'active'
+                    // Atualiza o título do cabeçalho principal com o título H2 da seção
+                    currentSectionTitle.textContent = activeSection.querySelector('h2') ? activeSection.querySelector('h2').textContent : 'Dashboard';
+                }
+            };
+
+            // Função para ativar o link correspondente na sidebar e atualizar o título (pode ser redundante com showSection, mas mantém a lógica de nav)
+            const activateNavLink = (sectionId) => {
+                sidebarLinks.forEach(link => link.classList.remove('active')); // Desativa todos os links
+                const targetLink = document.querySelector(`.sidebar-nav a[data-section="${sectionId}"]`);
+                if (targetLink) {
+                    targetLink.classList.add('active'); // Ativa o link correto
+                }
+            };
+
+            // --- Lógica Principal do Dashboard ---
+
+            // Navegação da Sidebar: Adiciona evento de clique a todos os links da sidebar
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Evita que o link recarregue a página
+                    const sectionId = link.dataset.section; // Pega o ID da seção do atributo data-section
+                    showSection(sectionId); // Exibe a seção
+                    activateNavLink(sectionId); // Ativa o link na sidebar
+                });
+            });
+
+            // Lógica de Logout: Adiciona evento de clique ao botão de Sair
+            if (logoutButton) {
+                logoutButton.addEventListener('click', (event) => {
+                    event.preventDefault(); // Evita o comportamento padrão do link
+                    sessionStorage.removeItem('medcarePatientLoggedIn'); // Limpa o status de login do sessionStorage
+                    window.location.href = 'login.html'; // Redireciona para a página de login
+                });
+            }
+
+            // Simulação de Submissão de Agendamento: Lida com o formulário de agendamento de consulta
+            if (scheduleAppointmentForm) {
+                scheduleAppointmentForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); // Impede o envio real do formulário
+                    
+                    const doctor = document.getElementById('doctorName').value;
+                    const date = document.getElementById('appointmentDate').value;
+                    const time = document.getElementById('appointmentTime').value;
+                    const reason = document.getElementById('reason').value;
+
+                    // Função local para exibir mensagens de feedback (sucesso/erro)
+                    const showMessage = (message, type) => {
+                        scheduleMessage.textContent = message;
+                        scheduleMessage.className = `form-message ${type}`; // Define a classe de estilo
+                        scheduleMessage.style.display = 'flex'; // Torna visível
+                        void scheduleMessage.offsetWidth; // Força reflow para CSS transition
+                        scheduleMessage.classList.add('show'); // Ativa a transição de entrada
+                        
+                        setTimeout(() => {
+                            scheduleMessage.classList.remove('show'); // Desativa a transição de entrada
+                            setTimeout(() => { scheduleMessage.style.display = 'none'; }, 500); // Esconde após a transição
+                        }, 5000); // Mensagem visível por 5 segundos
+                    };
+
+                    // Validação simples dos campos
+                    if (!doctor || !date || !time || !reason) {
+                        showMessage('Por favor, preencha todos os campos para agendar a consulta.', 'error');
+                        return;
+                    }
+
+                    // Simulação de sucesso
+                    showMessage(`Agendamento com "${doctor}" para ${date} às ${time} solicitado com sucesso!`, 'success');
+                    scheduleAppointmentForm.reset(); // Limpa o formulário
+                    console.log('Agendamento simulado:', { doctor, date, time, reason }); // Exibe no console
+                });
+            }
+
+            // Lógica de Edição de Perfil: Gerencia a edição dos campos do perfil
+            // Função para alternar o modo de edição dos inputs e visibilidade dos botões
+            const toggleProfileEdit = (isEditing) => {
+                profileInputs.forEach(input => {
+                    input.readOnly = !isEditing; // Define se o campo é somente leitura
+                    // Ajusta a cor de fundo com base no modo de edição (simulado)
+                    input.style.backgroundColor = isEditing ? 'var(--white)' : 'var(--light-gray)';
+                });
+                editProfileBtn.style.display = isEditing ? 'none' : 'inline-flex'; // Esconde/mostra botão "Editar"
+                saveProfileBtn.style.display = isEditing ? 'inline-flex' : 'none'; // Mostra/esconde botão "Salvar"
+                cancelProfileBtn.style.display = isEditing ? 'inline-flex' : 'none'; // Mostra/esconde botão "Cancelar"
+            };
+
+            // Evento para o botão "Editar Dados"
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', () => toggleProfileEdit(true));
+            }
+
+            // Evento para o botão "Cancelar" edição do perfil
+            if (cancelProfileBtn) {
+                cancelProfileBtn.addEventListener('click', () => {
+                    profileForm.reset(); // Reseta os campos do formulário para os valores iniciais (simulado)
+                    toggleProfileEdit(false); // Volta ao modo de visualização
+                });
+            }
+
+            // Evento de submissão do formulário de perfil (simulado)
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    alert('Dados do perfil salvos com sucesso (simulado)!'); // Alerta de sucesso
+                    toggleProfileEdit(false); // Volta ao modo de visualização
+                    // Em um cenário real, você enviaria os dados atualizados para um servidor aqui
+                });
+            }
+
+            // --- Inicialização ao Carregar a Página ---
+            // Exibe a primeira seção ("Visão Geral") e ativa o link correspondente na sidebar
+            showSection('overview');
+            activateNavLink('overview'); 
+        });
+    </script>
+</body>
+</html>
