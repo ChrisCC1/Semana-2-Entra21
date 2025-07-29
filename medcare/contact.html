@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - MedCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="" type="image/x-icon">
+
+    <style>
+        /* Variáveis de Cores */
+        :root {
+            --primary-blue: #003366; /* Azul Marinho Principal */
+            --secondary-blue: #007bff; /* Azul para acentos e botões */
+            --light-blue: #e0f2f7; /* Azul bem claro para fundos/destaques */
+            --white: #ffffff;
+            --light-gray: #f8f9fa; /* Cinza muito claro para fundos */
+            --gray: #6c757d; /* Cinza para textos secundários */
+            --dark-gray: #343a40; /* Cinza escuro para textos principais */
+            --border-color: #dee2e6;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Reset Básico e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-blue);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-blue);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--dark-gray);
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            color: var(--gray);
+            font-size: 1.1em;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Botões */
+        .btn-primary, .btn-primary-small, .btn-secondary, .btn-contact-emergency {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary-small {
+            padding: 8px 18px;
+            font-size: 0.95em;
+            border-radius: 6px;
+        }
+
+        .btn-primary-small:hover {
+            background-color: #0069d9;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            box-shadow: none;
+            padding: 12px 25px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 51, 102, 0.1);
+        }
+
+        .btn-contact-emergency {
+            background-color: var(--danger-red);
+            font-size: 1.2em;
+            padding: 15px 30px;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+        }
+
+        .btn-contact-emergency:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-menu {
+            display: flex; /* Garante que em desktop o menu esteja visível */
+            align-items: center;
+        }
+
+        .nav-menu a {
+            margin-left: 25px;
+            font-weight: 500;
+            color: var(--dark-gray);
+            position: relative;
+            padding-bottom: 5px; /* Espaço para o sublinhado */
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--secondary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-blue);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none; /* Escondido em desktop */
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section (Específico para "Contato") */
+        .hero-section {
+            background: linear-gradient(#023E8A, #03045e), url('https://source.unsplash.com/1600x900/?hospital,doctors') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 80px 0;
+            background-color: var(--white);
+            margin-bottom: 20px; /* Espaço entre as seções */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        section:nth-child(even) { /* Para alternar cor de fundo seções */
+            background-color: var(--light-gray);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+            border-radius: 2px;
+        }
+
+        /* Seção de Contato e Formulário */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+            justify-content: center;
+        }
+
+        .contact-info, .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info h3, .contact-form-container h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+        }
+
+        .contact-info ul li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--dark-gray);
+        }
+
+        .contact-info ul li i {
+            font-size: 1.5em;
+            color: var(--secondary-blue);
+            margin-right: 15px;
+            margin-top: 3px; /* Ajuste para alinhar com o texto */
+            min-width: 25px; /* Garante alinhamento mesmo com textos longos */
+        }
+
+        .contact-info ul li strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
+        }
+
+        .contact-form button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Seção de Mapa */
+        .map-section {
+            background-color: var(--light-gray);
+            padding: 0; /* O mapa já terá padding interno */
+            margin-bottom: 0; /* Última seção antes do footer */
+            border-radius: 0; /* Mapa pode ser de borda a borda */
+            box-shadow: none;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden; /* Garante que o iframe respeite o border-radius */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Footer (mesmo estilo das outras páginas) */
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 20px 0;
+            font-size: 0.95em;
+            margin-top: 20px; /* Garante espaço se a seção anterior não tiver */
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.4em;
+        }
+
+        .footer-col p {
+            color: #c0c0c0;
+            line-height: 1.8;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #c0c0c0;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .footer-col .social-icons a {
+            color: var(--white);
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col .social-icons a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .footer-col p i {
+            margin-right: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: #c0c0c0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+            }
+            .nav-menu {
+                display: none; /* Esconde o menu em telas menores */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--white);
+                position: absolute;
+                top: 80px; /* Abaixo do header */
+                left: 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+                z-index: 90;
+            }
+
+            .nav-menu.active {
+                display: flex; /* Mostra quando ativo */
+            }
+
+            .nav-menu a {
+                margin: 10px 20px;
+                text-align: center;
+                width: auto;
+            }
+
+            .btn-primary-small {
+                margin-top: 10px;
+                width: calc(100% - 40px); /* Ajusta a largura do botão dentro do menu */
+            }
+
+            .menu-toggle {
+                display: block; /* Mostra o botão de toggle */
+            }
+
+            .header-content {
+                padding-right: 20px; /* Garante padding no lado direito */
+            }
+
+            /* Ajustes para seções */
+            section {
+                padding: 60px 20px;
+            }
+            section h2 {
+                font-size: 2em;
+            }
+            .contact-content {
+                flex-direction: column; /* Empilha o conteúdo em mobile */
+            }
+            .contact-info, .contact-form-container {
+                min-width: auto; /* Remove largura mínima */
+                width: 100%;
+            }
+            .footer-columns {
+                grid-template-columns: 1fr; /* Coluna única em telas muito pequenas */
+            }
+            .btn-primary, .btn-secondary, .btn-contact-emergency {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+                padding: 15px 20px; /* Aumenta o padding para melhor toque */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+            .hero-content p {
+                font-size: 1em;
+            }
+            .contact-info h3, .contact-form-container h3 {
+                font-size: 1.5em;
+            }
+            .contact-info ul li {
+                font-size: 1em;
+            }
+            .contact-info ul li i {
+                font-size: 1.3em;
+            }
+            .map-container {
+                height: 400px; /* Altura do mapa em telas menores */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            .hero-content {
+                padding: 0 10px;
+            }
+            .section-description {
+                font-size: 1em;
+            }
+            .contact-info, .contact-form-container {
+                padding: 25px; /* Reduz padding em telas muito pequenas */
+            }
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header style="padding: 20px; text-align: right;">
+            <a href="register.html" class="btn btn-primary" style="margin-right: 10px;">
+                <i class="fas fa-user-plus"></i> Registrar-se
+            </a>
+            <a href="doctor-login.html" class="btn btn-secondary">
+                <i class="fas fa-user-md"></i> Área do Médico
+            </a>
+        </header>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">MedCare</a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Início</a>
+                <a href="about.html">Sobre Nós</a>
+                <a href="services.html">Serviços</a>
+                <a href="doctors.html">Corpo Clínico</a>
+                <a href="contact.html" class="active">Contato</a>
+                <a href="login.html" class="btn-primary-small">Login</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content">
+                <h1>Fale Conosco</h1>
+                <p>Estamos à disposição para tirar suas dúvidas, receber sugestões ou ajudar no que for preciso.</p>
+            </div>
+        </section>
+
+        <section class="contact-details-form">
+            <div class="container">
+                <h2>Canais de Atendimento</h2>
+                <p class="section-description">Escolha a melhor forma para entrar em contato com a equipe MedCare.</p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Informações de Contato</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Endereço:</strong>
+                                    Rua da Saúde, 123 - Centro<br>Blumenau, Santa Catarina - CEP: 89010-000
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <strong>Telefone:</strong>
+                                    (47) 3333-1234
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <strong>WhatsApp:</strong>
+                                    (47) 98888-7777
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>E-mail:</strong>
+                                    contato@medcare.com.br
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Horário de Atendimento:</strong>
+                                    Segunda a Sexta: 08h - 18h<br>Pronto Atendimento 24h
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <h3>Envie Sua Mensagem</h3>
+                        <form class="contact-form" action="#" method="POST">
+                            <label for="name">Nome Completo:</label>
+                            <input type="text" id="name" name="name" required placeholder="Seu nome">
+
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required placeholder="seu.email@example.com">
+
+                            <label for="subject">Assunto:</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Assunto da mensagem">
+
+                            <label for="message">Mensagem:</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Digite sua mensagem aqui..."></textarea>
+
+                            <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <h2>Onde Estamos Localizados</h2>
+                <p class="section-description">Visite o MedCare. Nosso endereço em Blumenau, Santa Catarina.</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.499691060965!2d-49.07175968846116!3d-26.918917876547193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df18843c08f10d%3A0x6b7b2b2b2b2b2b2b!2sHospital%20Santa%20Isabel!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>MedCare</h3>
+                    <p>Sua saúde é nossa prioridade. Cuidamos de você com excelência, tecnologia e humanidade.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="about.html">Sobre Nós</a></li>
+                        <li><a href="services.html">Serviços</a></li>
+                        <li><a href="doctors.html">Corpo Clínico</a></li>
+                        <li><a href="appointment.html">Agendar Consulta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua da Saúde, 123 - Centro, Blumenau - SC</p>
+                    <p><i class="fas fa-phone-alt"></i> (XX) XXXX-YYYY</p>
+                    <p><i class="fas fa-envelope"></i> contato@medcare.com.br</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MedCare. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="contact.js"></script>
+</body>
+</html>
